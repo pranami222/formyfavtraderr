@@ -3152,8 +3152,8 @@ filter: blur(0.3px) drop-shadow(0 0 6px rgba(255,255,255,0.2));
 
 #viewBtn{
     position: absolute;
-    bottom: 650px;
-    right: 600px;
+    bottom: 100px;
+    right: 15%;
 
     background: #fff3e6;
     border: none;
@@ -3167,6 +3167,7 @@ filter: blur(0.3px) drop-shadow(0 0 6px rgba(255,255,255,0.2));
 
     transition: all 0.2s ease;
 }
+
 
 #viewBtn:hover{
     transform: translateY(-2px) scale(1.05);
@@ -3191,17 +3192,21 @@ filter: blur(0.3px) drop-shadow(0 0 6px rgba(255,255,255,0.2));
     display: flex;
     flex-direction: column;
     align-items: center;
+
+transform: translateY(-20px);
 }
+
 
 #teddyBear{
     display: block;
     margin: 0 auto;
     cursor: pointer;
+    transform: scale(0.9);
 }
 
 .inputWrap{
     position: relative;
-    margin-top: 20px;
+    margin-top: 5px; /* was 20 → tighter fit */
 }
 
 /* ✍️ textarea glow */
