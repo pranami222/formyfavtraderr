@@ -3208,18 +3208,22 @@ filter: blur(0.3px) drop-shadow(0 0 6px rgba(255,255,255,0.2));
 .inputWrap{
     position: relative;
     margin-top: 5px; /* was 20 → tighter fit */
+	width: fit-content; 
 }
 
 #teddyInput{
-    width: min(260px, 80vw);   /* 💖 responsive width */
-    height: 90px;              /* slightly smaller */
+    width: min(260px, 80vw);
+    height: clamp(80px, 12vh, 100px);  /* 💖 responsive height */
 
     border-radius: 16px;
     padding: 12px 55px 12px 12px;
+    font-family: inherit;
 
     background: #fff8f6;
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-	
+
+    display: block;
+    max-width: 100%;
 }
 
 /* 💌 floating send button */
