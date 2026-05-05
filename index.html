@@ -3210,6 +3210,24 @@ filter: blur(0.3px) drop-shadow(0 0 6px rgba(255,255,255,0.2));
     margin-top: 5px; /* was 20 → tighter fit */
 	width: fit-content; 
 }
+	@media (max-height: 700px){
+
+  .teddyWrap{
+    transform: translateY(-3vh);   /* less aggressive push */
+  }
+
+  #teddyInput{
+    height: 70px;                 /* smaller so it fits */
+  }
+
+  .inputWrap{
+    margin-top: 2px;              /* reduce gap */
+  }
+
+  #sendBtn{
+    bottom: 8px;                  /* keep it inside */
+  }
+}
 
 #teddyInput{
     width: min(260px, 80vw);
