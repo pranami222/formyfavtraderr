@@ -1,0 +1,7731 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>for my fav trader</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap');
+body {
+    margin:0;
+    padding: 0;
+    font-family:'Playfair Display',serif;
+    min-height:100vh;
+    position:relative;
+    transition:0.5s;
+}
+
+/* ================= INTRO (ORIGINAL) ================= */
+	
+@keyframes fadeIn {0%{opacity:0;}100%{opacity:1;}}
+#welcome {font-size:64px; color:#1e1e3f; margin-bottom:40px; text-shadow: 0 4px 10px rgba(0,0,0,0.1);}
+#luffy-wrap {
+    position:relative;
+    width:140px;
+    height:140px;
+    margin-top:10px;
+    transform:translateY(60px);
+    opacity:0;
+
+    animation: enter 1.5s ease forwards 1.5s, float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes enter {to{transform:translateY(0);opacity:1;}}
+#luffy,#luffy-eyes {position:absolute; top:0; left:0; width:100%; height:100%; object-fit:contain;}
+#luffy {z-index:1;}
+#luffy-eyes {z-index:2; opacity:0; animation:blink 3s infinite;}
+@keyframes blink {0%,90%,100%{opacity:0;}95%{opacity:1;}}
+
+#intro {
+
+  position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    cursor: pointer;
+
+    z-index: 99999;
+
+    background: linear-gradient(to bottom, #ffd6dc 50%, #1e1e3f 50%) !important;
+
+
+}
+
+@keyframes bubble {to{opacity:1;}}
+
+#intro-bubble {
+    position: relative; /* IMPORTANT for triangle */
+    margin-top: 25px;
+    background: #ffd6dc;
+    padding: 14px 18px;
+    border-radius: 20px;
+    font-size: 14px;
+    text-align: center;
+    max-width: 260px;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+
+    opacity: 0;
+    animation: bubble 1s ease forwards 2.5s;
+}
+
+#intro-bubble::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    border-width: 10px;
+    border-style: solid;
+    border-color: #ffd6dc transparent transparent transparent;
+}
+
+#introContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    transform: translateY(60px); /* ⭐ push slightly down */
+}
+
+/* ================= HOME (ORIGINAL, UNTOUCHED) ================= */
+#home {
+    display: none;
+    position: relative;
+    z-index: 1;
+}
+body.day {background:linear-gradient(#f8d7da,#fff5f0);}
+body.night {background:linear-gradient(#1e1e3f,#2c2c54);}
+.title {font-size:52px;text-align:center;margin-top:40px;animation:wave 1.5s ease;}
+@keyframes wave {0%{transform:translateY(-20px);opacity:0;}100%{transform:translateY(0);opacity:1;}}
+body.day .title {color:#5a1f1f;}
+body.night .title {color:#ffe9a8;}
+.toggle {position:fixed;top:40px;right:40px;display:flex;flex-direction:column;}
+body.day .toggle{color:#800000;}
+body.night .toggle{color:#ffe9a8;}
+.guide {position:fixed;top:40px;left:40px;width:110px;cursor:pointer;}
+.guide img {width:100%;animation:bounce 1.2s infinite;}
+@keyframes bounce {0%{transform:translateY(0);}50%{transform:translateY(-14px);}100%{transform:translateY(0);}}
+.bubble {position:absolute;left:120px;top:20px;padding:10px;border-radius:15px;font-size:12px;width:170px;}
+body.day .bubble{background:#800000;color:#ffd6dc;}
+body.night .bubble{background:#fff3a6;color:#1e1e3f;}
+.playlist {position:fixed;left:40px;top:330px;width:170px;display:flex;flex-direction:column;align-items:center;}
+.playlist img {width:170px;height:150px;border-radius:20px;object-fit:cover;}
+.controls {margin-top:10px;display:flex;gap:10px;}
+.controls button {padding:6px 10px;border:none;border-radius:10px;background:#f3aeb5;color:white;cursor:pointer;}
+.scene {position:absolute;top:180px;left:50%;transform:translateX(-50%);display:flex;gap:60px;align-items:flex-end;}
+.right-side {position:relative;left:100px;}
+.window {width:300px;height:200px;position:relative;margin-bottom:450px;left:140px;}
+.window img {position:absolute;width:100%;height:100%;object-fit:cover;transition:opacity 1s ease;}
+.window-day{opacity:1;}
+.window-night{opacity:0;}
+body.night .window-day{opacity:0;}
+body.night .window-night{opacity:1;}
+.rain {position:absolute;
+width:2px;
+height:12px;
+background:white;
+opacity:0;
+animation:rain 0.5s linear infinite;}
+body.night .rain{opacity:0.4;} @keyframes rain {0%{transform:translateY(-5px);}100%{transform:translateY(170px);}}
+.night-lightning {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(200,170,255,0.6);
+    opacity: 0;
+}
+
+body.night .night-lightning.active {
+    animation: nightFlash 0.3s;
+}
+
+@keyframes nightFlash {
+    0% { opacity: 0; }
+    50% { opacity: 0.7; }
+    100% { opacity: 0; }
+}
+@keyframes flash {0%{opacity:0;}50%{opacity:0.7;}100%{opacity:0;}}
+.fireplace {width:200px;margin-bottom:400px;position:relative;transform:translateX(140px);}
+.fireplace img {position:absolute;width:100%;transition:opacity 1s ease;}
+.fire-day{opacity:1;}
+.fire-night{opacity:0;}
+body.night .fire-day{opacity:0;}
+body.night .fire-night{opacity:1;}
+body.night .fireplace{filter:drop-shadow(0 0 20px rgba(255,150,80,0.4));}
+.couch-area {position:relative;width:340px;height:300px;margin-top:140px;}
+.couch {position:absolute;bottom:0;width:100%;}
+.avatar-stand {width:170px;position:absolute;left:50%;bottom:0;transform:translateX(-50%);cursor:pointer;z-index:2;}
+.avatar-lay {width:150px;position:absolute;left:50%;bottom:110px;transform:translateX(-50%) rotate(90deg);display:none;z-index:2;}
+.blanket {width:105px;position:absolute;left:45%;bottom:190px;transform:translateX(-120%);opacity:0;display:none;z-index:3;transition:all 1.5s ease;}
+.blanket.show {transform:translateX(-50%);opacity:1;}
+.table {width:380px;position:relative;bottom:200px;}
+.table img {width:100%;}
+.laptop {position:absolute;width:auto !important;height:100px !important;top:18px;right:40px;z-index:2;object-fit:contain;transition:1s ease;}
+.popup {position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;padding:20px;border-radius:20px;display:none;flex-direction:column;gap:10px;}
+.popup button {padding:10px;border:none;border-radius:12px;background:#f3aeb5;color:white;cursor:pointer;}
+.blur {filter:blur(5px);}
+
+/* ================= BOOK UI (NEW + NEXT/PREV) ================= */
+/* BOOK CONTAINER */
+#bookContainer {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;          /* invisible initially */
+    transition: opacity 1s ease; /* fade in */
+}
+
+#book {
+    position: relative;
+    width: 90vw;
+    max-width: 900px;
+    height: 60vh;
+    max-height: 600px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    border-radius: 10px;
+    overflow: visible;
+    background: #fff;
+    border: 10px solid #e3c3f7; /* very light purple border */
+}
+
+@media (max-height: 700px) {
+  #book {
+    height: 70vh;
+  }
+}
+
+#bookContainer.show {
+    transform:translate(-50%,-50%) scale(1);
+    opacity:1;
+}
+/* PAGES */
+.page {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    top: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
+    padding-bottom: 80px;
+}
+
+#leftPage, #rightPage {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+#leftPage {
+    left: 0;
+}
+
+#rightPage {
+    right: 0;
+}
+
+.page::after {
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    pointer-events:none;
+    box-shadow: inset -20px 0 30px rgba(0,0,0,0.1);
+    opacity:1;
+    transition:opacity 1s ease;
+}
+
+.page.turnNext::after {
+    opacity:1;
+}
+/* CRUMPLED PAGES */
+.crumpledPage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+#leftPage {
+    left: 0;
+    z-index: 3;
+}
+
+#rightPage {
+    right: 0;
+    z-index: 4;
+}
+
+
+/* STICKY NOTES */
+    
+.stickyNote {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+
+    background-size: cover;       /* scale the image to fill the note */
+    background-position: center;  /* center it */
+    background-repeat: no-repeat; 
+
+    cursor: pointer;
+    user-select: none;
+    z-index: 5;                   /* above crumpled page */
+}
+
+/* Positions for page 1 sticky notes (adjust as you like) */
+#note1 { top: 20px; left: -30px; }
+#note2 { top: 140px; left: -30px; }
+#note3 { top: 260px; left: -30px; }
+#note4 { top: 380px; left: -30px; }
+
+#note5 { top: 0px; left: 20px; }
+#note6 { top: 120px; left: 20px; }
+#note7 { top: 240px; left: 20px; }
+#note8 { top: 360px; left: 20px; }
+
+/* HOVER PREVIEW ON RIGHT PAGE */
+#rightContent {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.noteText {
+    line-height: 85px;   /* same as sticky note height */
+    display: block;
+    text-align: center;
+    font-size: 12px;
+}
+
+/* REMOVE this hover visibility if present */
+.stickyNote:hover {transform:translateY(-5px) rotate(-2deg);}	
+
+/* SPINE */
+#spine {
+    width: 40px;
+    background: #c3a3f7; /* light purple! */
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-50%);
+    z-index: 5;
+    display: flex;
+    flex-direction: column; /* stack rings vertically */
+    justify-content: space-around; /* evenly space */
+    align-items: center;
+    border-radius: 0 5px 5px 0;
+    padding: 5px 0; /* small top/bottom padding */
+}
+
+/* show spine only when book opens */
+#bookContainer.show #spine {
+    display:none;
+}
+
+#spine .ring {
+    width: 12px;
+    height: 6px;
+    background: #fff; /* rings are white now for contrast */
+    border-radius: 6px/3px;
+}
+
+
+/* ================= SHIFT STICKY NOTES LEFT ================= */
+
+#leftPage .stickyNote {
+    width: 90px;
+    height: 90px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Explicit positions to avoid overlapping & last note inside book */
+#note1 { top: 0px; left: 20px; }       /* moved 20px up */
+#note2 { top: 120px; left: 20px; }     /* moved 20px up */
+#note3 { top: 240px; left: 20px; }     /* moved 20px up */
+#note4 { top: 360px; left: 20px; }     /* last note fits nicely now */
+
+
+#leftPage .stickyNote:hover {
+    transform: translateX(-25px) translateY(-5px) rotate(-2deg);
+}
+.ring {width:12px;height:6px;background:#333;border-radius:6px/3px;}
+#nextButton, #prevButton {
+    position: absolute;
+    bottom: 10px;
+    padding: 8px 12px;
+    background: #c3a3f7;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 9999;
+
+    /* 🔥 IMPORTANT FIX */
+    transform: translateZ(0);
+}
+#nextButton {right:10px;}
+#prevButton {left:10px;}
+.page.turnNext {
+    transform: rotateY(-180deg) translateZ(1px);
+    z-index: 1;
+}
+
+.page.turnPrev {
+    transform: rotateY(0deg) translateZ(1px);
+    z-index: 2;
+}
+
+/* ================= RIGHT PAGE PREVIEW BOX ================= */
+#previewBox {
+position: absolute;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* centers perfectly */
+
+    width: 55%;   /* smaller width */
+    height: 55%;  /* smaller height */
+
+    background: #4b1e6e;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+
+    padding: 20px;
+
+    opacity: 1;
+    transition: opacity 0.3s ease;
+
+    z-index: 10;
+    overflow: hidden;
+}
+
+#previewBoxContent {
+    color: #ffe9f0;
+    font-size: 14px;
+    line-height: 1.5;
+
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.3s ease;
+}
+
+/* cute pin on top corner */
+#previewBox .pin {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+    pointer-events: none;   /* so it doesn’t block hover */
+}
+
+#bookGuide {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 130px;
+    z-index: 20000;
+    display: none; /* start hidden */
+
+}
+
+#bookLuffy {
+    width: 100%;
+    animation: floatLuffy 2s ease-in-out infinite;
+}
+
+@keyframes floatLuffy {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
+}
+
+#bookBubble {
+    position: absolute;
+    top: 0;
+    left: 110%;
+
+    padding: 10px 12px;
+    border-radius: 14px;
+    font-size: 12px;
+    width: 160px;
+
+    box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+
+    animation: popIn 0.4s ease;
+}
+
+    @keyframes popIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 🌸 DAY MODE */
+body.day #bookBubble {
+    background: #800000;
+    color: #ffd6dc;
+}
+
+/* 🌙 NIGHT MODE */
+body.night #bookBubble {
+    background: #fff3a6;
+    color: #1e1e3f;
+}
+
+#bookMusicControls {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+
+    display: none;
+    gap: 10px;
+
+    z-index: 20000;
+}
+
+#bookMusicControls button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 12px;
+
+    background: #f3aeb5;
+    color: white;
+    cursor: pointer;
+
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    transition: 0.2s;
+}
+
+#bookMusicControls button:hover {
+    transform: scale(1.1);
+}
+#notesPage {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(to bottom, #f2a1b2, #ffe0ea);
+
+    z-index: 30000;
+
+    display: none; /* ✅ ADD THIS */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+/* CENTER NOTIFICATION */
+#centerNotif {
+    width: 420px;              /* bigger width */
+    min-height: 140px;         /* adds height */
+
+    background: #e5e5ea;
+    border-radius: 25px;
+
+    padding: 8px 12px 12px 12px; /* 🔥 less top padding */
+
+
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+
+    cursor: pointer;
+    transition: 0.3s;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#centerNotif:hover {
+    transform: scale(1.03);
+}
+
+/* HEADER */
+.notif-header {
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 13px;
+    color: #555;
+
+    margin-bottom: 6px;
+
+    align-items: flex-start; /* 🔥 THIS is the real fix */
+}
+
+.notif-header span:first-child {
+    position: relative;
+    top: -35px;
+}
+
+.notif-header span:last-child {
+    position: relative;
+    top: -35px;
+}
+
+/* specifically target "MESSAGES" */
+.notif-header span:first-child {
+    color: #a0004f;   /* dark pink */
+    font-weight: 700;
+}
+
+/* MESSAGE TEXT */
+#notifText {
+    font-size: 16px;
+    color: #111;
+    margin-top: 5px;
+}
+
+#notesPage.show {
+    display: flex; /* ✅ ADD THIS */
+    opacity: 1;
+}
+
+#backToBook {
+    position: fixed;        /* force screen positioning */
+    bottom: 20px;
+    left: 20px;
+
+    padding: 12px 18px;
+    font-size: 14px;
+
+    background: red;        /* debug color */
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+
+    z-index: 9999999;       /* above EVERYTHING */
+    display: block;
+}
+
+#notifContainer {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 99999;
+}
+
+@keyframes popIn {
+  from {
+    transform: translateY(20px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.notification:hover {
+  transform: scale(1.05);
+}
+
+#notesGuide {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 130px;
+    z-index: 40000;
+}
+
+#notesLuffy {
+    width: 100%;
+    animation: floatLuffy 2s ease-in-out infinite;
+}
+
+#notesBubble {
+    position: absolute;
+    top: 0;
+    left: 110%;
+
+    padding: 10px 12px;
+    border-radius: 14px;
+    font-size: 12px;
+    width: 160px;
+
+    box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+
+    animation: popIn 0.4s ease;
+}
+
+/* reuse your existing float animation */
+@keyframes floatLuffy {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
+}
+
+/* DAY MODE */
+body.day #notesBubble {
+    background: #800000;
+    color: #ffd6dc;
+}
+
+/* NIGHT MODE */
+body.night #notesBubble {
+    background: #fff3a6;
+    color: #1e1e3f;
+}
+
+#dodoPage {
+    position: fixed;
+    inset: 0;
+    background: #bfe6ff; /* baby blue */
+    z-index: 30000;
+
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+/* SHOW STATE */
+#dodoPage.show {
+    display: flex;
+    opacity: 1;
+}
+
+/* BACK BUTTON (same style as notes) */
+#backToBookDodo {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+
+    padding: 12px 18px;
+    font-size: 14px;
+
+    background: red;
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+
+    z-index: 9999999;
+    cursor: pointer;
+}
+
+/* GUIDE (same position style as notes) */
+#dodoGuide {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 130px;
+    z-index: 40000;
+}
+
+#dodoLuffy {
+    width: 100%;
+    animation: floatLuffy 2s ease-in-out infinite;
+}
+
+#dodoBubble {
+    position: absolute;
+    top: 0;
+    left: 110%;
+
+    padding: 10px 12px;
+    border-radius: 14px;
+    font-size: 12px;
+    width: 160px;
+    pointer-events: none;
+
+    background: #fff3a6;
+    color: #1e1e3f;
+    transition: all 0.3s ease;
+
+    box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+}
+
+#lightPage {
+    position: fixed;
+    inset: 0;
+    background: #ffd8a8; /* soft pastel orange 🍊 */
+    z-index: 30000;
+
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+#lightPage.show {
+    display: flex;
+    opacity: 1;
+}
+
+/* BACK BUTTON */
+#backToBookLight {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+
+    padding: 12px 18px;
+    font-size: 14px;
+
+    background: red;
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+
+    z-index: 9999999;
+    cursor: pointer;
+}
+
+/* LUFFY GUIDE */
+#lightGuide {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 130px;
+    z-index: 40000;
+    pointer-events: none;
+}
+
+#lightLuffy {
+    width: 100%;
+    animation: floatLuffy 2s ease-in-out infinite;
+}
+
+#lightBubble {
+    position: absolute;
+    top: 0;
+    left: 110%;
+
+    padding: 10px 12px;
+    border-radius: 14px;
+    font-size: 12px;
+    width: 160px;
+
+    background: #fff3a6;
+    color: #1e1e3f;
+    pointer-events: none;
+
+    box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+}
+
+#redCarpetPage {
+    position: fixed;
+    inset: 0;
+    background: #f4a3a3; /* elegant pastel red ❤️ */
+    z-index: 30000;
+
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+#redCarpetPage.show {
+    display: flex;
+    opacity: 1;
+}
+
+/* BACK BUTTON */
+#backToBookRed {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+
+    padding: 12px 18px;
+    font-size: 14px;
+
+    background: red;
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+
+    z-index: 9999999;
+    cursor: pointer;
+}
+
+/* LUFFY GUIDE */
+#redCarpetGuide {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 130px;
+    z-index: 40000;
+}
+
+#redCarpetLuffy {
+    width: 100%;
+    animation: floatLuffy 2s ease-in-out infinite;
+}
+
+#redCarpetBubble {
+    position: absolute;
+    top: 0;
+    left: 110%;
+
+    padding: 10px 12px;
+    border-radius: 14px;
+    font-size: 12px;
+    width: 160px;
+
+    background: #fff3a6;
+    color: #1e1e3f;
+
+    box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+}
+
+/* ===== EXTRA PAGES BASE ===== */
+.extraPage {
+    position: absolute;
+    inset: 0;
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    z-index: 50000;
+}
+
+/* ===== LUFFY GUIDE ===== */
+.pageGuide {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 130px;
+}
+
+.pageGuide img {
+    width: 100%;
+    animation: floatLuffy 2s ease-in-out infinite;
+}
+
+/* bubble */
+.pageBubble {
+    position: absolute;
+    top: 0;
+    left: 110%;
+
+    padding: 10px 12px;
+    border-radius: 14px;
+    font-size: 12px;
+    width: 160px;
+
+    background: #800000;
+    color: #ffd6dc;
+
+    box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+}
+
+/* ===== BACK BUTTON ===== */
+.backBtn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+
+    padding: 12px 18px;
+    font-size: 14px;
+
+    background: #f3aeb5;
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* ===== FLOAT ANIMATION ===== */
+@keyframes floatLuffy {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
+}
+
+/* ===== NAMI PAGE COLOR ===== */
+#namiPage {
+    background: linear-gradient(135deg, #3d3470, #5a4fa3, #7a6bd6);
+}
+
+/* ===== FLASHCARDS PAGE ===== */
+
+/* ===== LUFFY GUIDE ===== */
+#flashcardsPage .pageGuide {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 130px;
+}
+
+#flashcardsPage .pageGuide img {
+    width: 100%;
+    animation: floatLuffy 2s ease-in-out infinite;
+}
+
+/* ===== BUBBLE ===== */
+#flashcardsPage .pageBubble {
+    position: absolute;
+    top: 0;
+    left: 110%;
+
+    padding: 10px 12px;
+    border-radius: 14px;
+    font-size: 12px;
+    width: 160px;
+
+    background: #800000;
+    color: #ffd6dc;
+
+    box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+}
+
+/* ===== BACK BUTTON ===== */
+#flashcardsPage .backBtn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+
+    padding: 12px 18px;
+    font-size: 14px;
+
+    background: #f3aeb5;
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* ===== SPOIL ME PAGE ===== */
+#spoilPage {
+    position: fixed;
+    inset: 0;
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 50000;
+
+   background: linear-gradient(to bottom, #f2e6ff, #dcc6ff);
+}
+
+/* ===== LUFFY GUIDE ===== */
+#spoilPage .pageGuide {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 130px;
+}
+
+#spoilPage .pageGuide img {
+    width: 100%;
+    animation: floatLuffy 2s ease-in-out infinite;
+}
+
+/* ===== BUBBLE ===== */
+#spoilPage .pageBubble {
+    position: absolute;
+    top: 0;
+    left: 110%;
+
+    padding: 10px 12px;
+    border-radius: 14px;
+    font-size: 12px;
+    width: 160px;
+
+    background: #800000;
+    color: #ffd6dc;
+
+    box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+}
+
+/* ===== BACK BUTTON ===== */
+#spoilPage .backBtn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+
+    padding: 12px 18px;
+    font-size: 14px;
+
+    background: #f3aeb5;
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* ===== MESSAGE PAGE ===== */
+#messagePage {
+    position: fixed;
+    inset: 0;
+    display: none;
+     flex-direction: column;
+
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 25px;
+
+    z-index: 50000;
+    margin-top: 0;
+
+   background: #b08968; /* teddy bear brown 🧸 */
+}
+
+/* ===== LUFFY GUIDE ===== */
+#messagePage .pageGuide {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 130px;
+}
+
+#messagePage .pageGuide img {
+    width: 100%;
+    animation: floatLuffy 2s ease-in-out infinite;
+}
+
+/* ===== BUBBLE ===== */
+#messagePage .pageBubble {
+    position: absolute;
+    top: 0;
+    left: 110%;
+
+    padding: 10px 12px;
+    border-radius: 14px;
+    font-size: 12px;
+    width: 160px;
+
+    background: #800000;
+    color: #ffd6dc;
+
+    box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+}
+
+/* ===== BACK BUTTON ===== */
+#messagePage .backBtn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+
+    padding: 12px 18px;
+    font-size: 14px;
+
+    background: #f3aeb5;
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#dodoPage {
+    position: fixed;
+    inset: 0;
+    background: #bfe6ff;
+    z-index: 30000;
+
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* center egg properly */
+.dodoCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+#dodoEgg {
+    width: 190px;
+    cursor: pointer;
+    transition: 0.3s;
+    filter: drop-shadow(0 0 8px rgba(255,255,255,0.6));
+}
+
+@keyframes eggIdle {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+}
+
+#dodoEgg.cracking {
+    animation: shake 0.4s ease, glow 1s ease-in-out 3;
+    filter: drop-shadow(0 0 20px #ffffff)
+            drop-shadow(0 0 40px #aeefff);
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    50% { transform: translateX(6px); }
+    75% { transform: translateX(-4px); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes glow {
+    0% {
+        filter: drop-shadow(0 0 5px #fff);
+    }
+    50% {
+        filter: drop-shadow(0 0 25px #bfefff)
+                drop-shadow(0 0 45px #ffffff);
+    }
+    100% {
+        filter: drop-shadow(0 0 5px #fff);
+    }
+}
+
+#dodoEgg:hover {
+    transform: scale(1.1);
+}
+
+#dodoEgg {
+    animation: eggIdle 2s ease-in-out infinite;
+}
+
+#babyContainer {
+    display: none;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.baby {
+    width: 140px;
+    transition: opacity 1s ease, transform 1s ease;
+    animation: pop 0.6s ease;
+}
+
+@keyframes pop {
+    0% { transform: scale(0.3); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+#dodoEgg.cracking {
+    animation: shake 0.9s ease;
+}
+
+.babyWrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 5;
+}
+
+.babyBubble {
+    margin-top: 8px;
+    padding: 6px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+    animation: pop 0.4s ease;
+    z-index: 5;
+    white-space: nowrap;
+}
+
+/* 💜 Dodo (purple) */
+.purple {
+    background: #d9c2ff;
+    color: #3b2a5a;
+}
+
+/* 💗 Doll (pink) */
+.pink {
+    background: #ffbfd6;
+    color: #5a1f3a;
+}
+
+#boyBubble {
+    position: absolute;
+
+    top: -40px;
+    left: -10px;
+
+    padding: 6px 10px;
+    border-radius: 12px;
+
+    font-size: 12px;
+
+    background: #d9c2ff;
+    color: #3b2a5a;
+
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+
+    transition: transform 0.3s ease;
+}
+
+#girlBubble {
+    position: absolute;
+
+    top: -40px;
+    right: -10px;
+
+    padding: 6px 10px;
+    border-radius: 12px;
+
+    font-size: 12px;
+
+    background: #ffbfd6;
+    color: #5a1f3a;
+
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+
+    transition: transform 0.3s ease;
+}
+
+#sleepUI {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+
+    width: 240px;        /* bigger */
+    padding: 12px 14px;
+
+    background: rgba(255, 255, 255, 0.55);
+    border-radius: 18px;
+
+    backdrop-filter: blur(6px);
+
+    font-size: 13px;
+    color: #3b2a5a;
+
+    box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+
+    opacity: 0;
+    transition: 1s ease;
+}
+
+#sleepLabel {
+    font-weight: 600;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+    opacity: 0.8;
+}
+
+#sleepBar {
+    width: 100%;
+    height: 14px;
+
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 999px;
+    overflow: hidden;
+
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.08);
+}
+
+#sleepFill {
+    height: 100%;
+    width: 0%;
+
+    background: linear-gradient(
+        90deg,
+        #ffd6e0,   /* soft pink */
+        #cdb4ff,   /* lavender */
+        #a0e7e5    /* soft mint */
+    );
+
+    border-radius: 999px;
+
+    transition: width 0.6s ease;
+}
+
+/* action menu */
+#dodoActions {
+    position: absolute;
+    right: 30px;
+    bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    opacity: 0;
+    transform: translateX(20px);
+    transition: 0.8s ease;
+}
+
+#dodoActions.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.dodoBtn {
+    background: #ffffffcc;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 12px;
+    box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+}
+
+.dodoBtn:hover {
+    transform: scale(1.05);
+}
+
+#babyBlanket {
+    position: absolute;
+    bottom: -120px; /* start below view */
+
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 220px;  /* adjust to match both babies */
+
+    opacity: 0;
+
+    z-index: 10;
+
+    transition: all 1.2s ease;
+    
+}
+
+/* when active */
+#babyBlanket.show {
+    bottom: 20px;   /* moves upward onto babies */
+    opacity: 1;
+}
+
+#babyBlanket {
+    position: absolute;
+
+    width: 220px;
+    z-index: 10;
+    cursor: pointer;
+
+    user-select: none;
+   
+
+    transition: transform 0.2s ease;
+}
+
+.babyBubble {
+    transition: transform 0.25s ease, opacity 0.3s ease;
+}	
+
+#patHand {
+    position: absolute;
+    bottom: 120px;
+    right: 40px;
+
+    width: 90px;
+
+    opacity: 0;
+    transition: 0.6s ease;
+
+    cursor: grab;
+    z-index: 100;
+}
+
+#patHand:active {
+    cursor: grabbing;
+}
+
+#dodoCenter {
+    position: relative;
+}
+
+#bottleContainer {
+    position: absolute;
+    bottom: 40px;
+    display: flex;
+    gap: 30px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    pointer-events: none; /* prevents clicking before shown */
+    z-index: 9999;
+}
+
+#bottleContainer.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.bottle {
+    width: 40px;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+    z-index: 1000;
+}
+
+#diaperContainer, #cleanDiaperContainer {
+    position: absolute;
+    bottom: 40px;
+    display: none;
+    gap: 20px;
+    z-index: 10000;
+}
+
+.diaper {
+    width: 60px;
+    cursor: pointer;
+    transition: 0.4s ease;
+}
+
+#dustbin {
+    width: 60px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.sparkle {
+    position: absolute;
+    font-size: 18px;
+    pointer-events: none;
+    animation: pop 0.6s ease;
+}
+
+.grownBoy {
+    width: 400px;
+}
+
+.grownGirl {
+    width: 180px;
+}
+
+#lightScene {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* 🌿 grass base */
+.grass {
+    position: absolute;
+    bottom: 0;
+    width: 120px;
+    opacity: 0.9;
+}
+
+/* 🌿 individual placements */
+.g1 { left: 8%; transform: rotate(-5deg); }
+.g2 { left: 30%; transform: rotate(3deg); }
+.g3 { left: 90%; transform: rotate(-2deg); }
+
+/* 🪨 stones */
+.stone {
+    position: absolute;
+    bottom: 10px;
+    width: 90px;
+    opacity: 0.95;
+}
+
+/* 🪨 placements */
+.s1 { left: 40%; }
+.s2 { left: 80%; }
+
+#lightDog {
+    position: absolute;
+    bottom: 100px;   /* keep your original */
+    left: 52%;      /* 👈 adjust THIS slightly (try 52%–58%) */
+    transform: translateX(-50%);
+    width: 110px;   /* or whatever you're using */
+    z-index: 2;
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+/* ✨ main glow */
+#lightDog.glow {
+    filter: drop-shadow(0 0 10px rgba(255, 200, 120, 0.8))
+            drop-shadow(0 0 18px rgba(255, 180, 80, 0.6));
+}
+
+@keyframes lightPulse {
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 8px rgba(255,180,80,0.6));
+    }
+    50% {
+        transform: scale(1.06);
+        filter: drop-shadow(0 0 18px rgba(255,200,120,1));
+    }
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 8px rgba(255,180,80,0.6));
+    }
+}
+
+#lightDog.glow {
+    animation: lightPulse 1.8s ease-in-out infinite;
+}
+
+
+.avatar{
+    position: absolute;
+    bottom: 40px;
+
+    opacity: 0;
+    transition: opacity 1.5s ease;
+
+    width: 160px;
+}
+
+/* 🧍 BF avatar (front) */
+#bfAvatar{
+    left: 20%;   /* adjust if needed */
+    z-index: 20;
+}
+
+/* 🫣 Nami (behind BF slightly) */
+#namiAvatar{
+    left: 15%;   /* slightly left so she hides */
+    z-index: 20;
+}
+
+.chatBubble{
+    position: absolute;
+    top: 60%;
+
+    padding: 10px 14px;
+    border-radius: 16px;
+    font-size: 13px;
+
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 1.8s ease, transform 1.8s ease;
+    z-index: 10;
+}
+
+/* 💗 nami bubble */
+#namiChat{
+    left: 12%;   /* 👈 moved left */
+    background: #ffbfd6;
+    color: #5a1f3a;
+}
+
+/* 💙 bf bubble */
+#bfChat{
+    left: 28%;   /* 👈 closer + slightly left */
+    background: #1e2a5a;
+    color: #ffffff;
+}
+
+.fadeOut {
+    opacity: 0 !important;
+    transform: translateY(10px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+#trampoline {
+    position: absolute;
+    bottom: 170px;
+    right: 9%;
+
+    width: 220px;
+
+    opacity: 0;
+    transition: opacity 1.2s ease;
+    z-index: 10;
+}
+
+#growndodo {
+    position: absolute;
+    bottom: 220px;
+    right: 10.5%;
+
+    width: 175px;
+
+    opacity: 0;
+    z-index: 10;
+}
+
+@keyframes jumpLoop {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-85px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.jumpLoop {
+    animation: jumpLoop 1.6s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+    transform-origin: bottom;
+    will-change: transform;
+}
+
+#namiChair {
+    position: absolute;
+    bottom: 75px;
+    left: 7%;   /* LEFT SIDE placement */
+    
+    width: 146px;
+    
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+
+#namiChair {
+    filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.2));
+}
+
+#namiChairImg {
+    width: 100%;
+    height: auto;
+    display: block;
+    z-index: 5;
+}
+
+#namiChairBubble {
+    position: absolute;
+    top: -60px;
+    left: 12px;
+
+    background: #ffb6d5;
+    color: #5a1a1a; /* dark maroon */
+    padding: 8px 12px;
+    border-radius: 12px;
+
+    font-size: 14px;
+    opacity: 0;
+    transform: translateY(10px);
+
+    transition: opacity 1.5s ease, transform 1.5s ease;
+    white-space: nowrap;
+}
+
+#lightDodoBubble {
+    position: absolute;
+    bottom: 400px;
+    left: 90%;
+    transform: translateX(-50%);
+
+    background:  #a8d8ff; /* soft baby blue */
+    padding: 6px 10px;
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    opacity: 0;
+    transition: opacity 0.6s ease;
+
+    z-index: 99999;
+    pointer-events: none;
+}
+
+#lightMenu {
+    position: absolute;
+    top: 35%;
+    left: 65%;
+
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(10px);
+
+    padding: 12px;
+    border-radius: 16px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+
+    transition: all 0.3s ease;
+    z-index: 99999;
+}
+
+#lightMenu.show {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+#lightMenu button {
+    border: none;
+    padding: 8px 12px;
+    border-radius: 999px;
+
+    background: #ffeef5;
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+#lightMenu button:hover {
+    transform: scale(1.08);
+}
+
+#lightDogBubble {
+    position: absolute;
+    bottom: 80px;   /* adjust based on Light's position */
+    left: 52%;       /* move near dog */
+
+    background: #3a3a3a;
+    color: #ff9f43;
+
+    padding: 6px 10px;
+    border-radius: 12px;
+
+    font-size: 13px;
+
+    opacity: 0;
+    transform: scale(0.9);
+
+    transition: all 0.3s ease;
+    z-index: 99999;
+}
+
+#lightHand {
+    position: absolute;
+    bottom: 120px;
+    right: 80px;
+
+    width: 80px;
+
+    opacity: 0;
+    transform: scale(0.8);
+
+    transition: all 0.3s ease;
+
+    z-index: 99999;
+    pointer-events: auto;
+    cursor: grab;
+}
+
+#fetchToy {
+    position: absolute;
+    bottom: 120px;
+    left: 60%;
+
+    width: 60px;
+
+    opacity: 0;
+    transform: scale(0.8);
+
+    transition: all 0.5s ease;
+
+    z-index: 99998;
+}
+
+#dogTreat {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+
+    width: 50px;
+
+    opacity: 0;
+    transform: scale(0.5);
+
+    transition: all 0.5s ease;
+    z-index: 9999;
+}
+
+#redCarpetScene{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+     perspective: 1000px; /* 👈 gives depth */
+}
+
+/* 🟥 carpet centered */
+#carpet{
+    position: absolute;
+    bottom: 270px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20%;
+    z-index: 1;
+}
+
+#bfWalk{
+    position: absolute;
+    bottom: 500px;
+    left: 50%;
+    transform: translateX(-50%) scale(0.75) translateY(0);
+
+    width: 100px;
+    z-index: 5;
+
+  transition: transform 6.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease;
+
+   transform-origin: bottom center; /* 👈 THIS CHANGES EVERYTHING */
+   transform-style: preserve-3d; /* 👈 allows 3D transforms */
+}
+
+/* final position */
+#bfWalk.walk{
+     transform: translateX(-50%) scale(1.15) translateY(120px);
+}
+
+/* 🧸 growndoll */
+#growndoll{
+    position: absolute;
+    bottom: 400px;
+    left: 30%;
+    width: 90px;
+    z-index: 4;
+}
+
+/* 👥 CROWD AREA */
+#crowdContainer{
+    position: absolute;
+    bottom: 20px;
+    left: 50;
+    width: 120%;
+    height: 340px;
+    
+
+    z-index: 2;
+    pointer-events: none; /* 👈 important */
+}
+
+/* crowd image */
+.crowdImg{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform: translateX(-9%);
+}
+
+
+/* 💬 crowd speech bubbles */
+#crowdBubbles{
+    position: absolute;
+    bottom: 120px;
+    width: 100%;
+    height: 100px;
+    pointer-events: none;
+}
+
+
+#flashContainer{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.flash{
+    position: absolute;
+    width: 80px;
+    height: 80px;
+
+    background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 70%);
+    opacity: 0;
+
+    border-radius: 50%;
+}
+
+.crowdBubble{
+    position: absolute;
+    bottom: 0;
+
+    background: rgba(255,255,255,0.95);
+    padding: 6px 10px;
+    border-radius: 14px;
+
+    font-size: 13px;
+    font-weight: 400;
+
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+
+    animation: crowdPop 2.8s ease forwards;
+
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+/* ✨ float up + fade */
+@keyframes crowdPop{
+    0%{
+        opacity: 0;
+        transform: translateY(20px) scale(0.8);
+    }
+    20%{
+        opacity: 1;
+        transform: translateY(0px) scale(1);
+    }
+    100%{
+        opacity: 0;
+        transform: translateY(-40px) scale(0.95);
+    }
+}
+
+#growndollBubble{
+    position: absolute;
+    bottom: 540px; /* adjust based on your doll position */
+    left: 21.4%;
+
+    background: #ffd6eb; /* soft pastel pink */
+    color: #6b1f3a; /* soft maroon */
+
+    padding: 8px 12px;
+    border-radius: 14px;
+
+    font-size: 13px;
+    font-weight: 400;
+
+    opacity: 0;
+    transform: scale(0.9);
+
+    transition: all 0.4s ease;
+
+    z-index: 10;
+}
+
+/* ✨ tiny pop animation */
+.growndollPop{
+  transform: scale(1.05);
+}
+
+#bfMenu{
+    position: absolute;
+    bottom: 560px; /* adjust near bf */
+    left: 50%;
+
+    transform: translateX(-50%) scale(0.9);
+    transform-origin: bottom center;
+
+    background: rgba(255, 240, 245, 0.95); /* soft pink */
+    backdrop-filter: blur(6px);
+
+    padding: 10px;
+    border-radius: 16px;
+
+    box-shadow: 0 8px 25px rgba(255, 182, 193, 0.3);
+
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+
+    z-index: 999;
+}
+
+/* show state */
+#bfMenu.show{
+    display: flex;
+    animation: menuPop 0.25s ease;
+}
+
+@keyframes menuPop{
+    from{
+        opacity: 0;
+        transform: translateX(-50%) scale(0.8);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+}
+
+/* options */
+.bfOption{
+    padding: 6px 12px;
+    border-radius: 10px;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    color: #6b1f3a;
+    background: rgba(255,255,255,0.7);
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.bfOption:hover{
+    background: #ffd6eb;
+    transform: scale(1.05);
+}
+
+/* 🚗 LIMO */
+#limo{
+    position: absolute;
+    bottom: 300px;
+    right: 9%;
+
+    width: 300px;
+
+    opacity: 0; /* hidden initially */
+    z-index: 3;
+}
+
+/* 🤸 SPEED */
+#speedAvatar{
+    position: absolute;
+    bottom: 300px;
+    right: 12%;
+
+    width: 110px;
+
+    opacity: 0; /* hidden initially */
+    transform: translateX(0);
+
+    z-index: 4;
+}
+
+/* 🤸 smooth flipping chaos */
+@keyframes speedFlip{
+    0%{
+        transform: rotate(0deg) translateX(0px);
+    }
+    25%{
+        transform: rotate(90deg) translateX(10px);
+    }
+    50%{
+        transform: rotate(180deg) translateX(20px);
+    }
+    75%{
+        transform: rotate(270deg) translateX(30px);
+    }
+    100%{
+        transform: rotate(360deg) translateX(40px);
+    }
+}
+
+/* apply flip */
+.speedFlip{
+    animation: speedFlip 6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+#speedAvatar.walkLeft{
+    transition: transform 2.5s ease;
+    transform: translateX(-180px); /* 👈 move toward carpet */
+}
+
+#speedBubble{
+    position: absolute;
+    bottom: 430px;
+    right: 13%;
+
+    background: #0f3d2e; /* 🌿 deep dark green */
+    color: #ffb347; /* 🍊 soft tangy orange */
+
+    padding: 6px 10px;
+    border-radius: 12px;
+
+    font-size: 13px;
+    font-weight: 400;
+
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    z-index: 6;
+}
+
+#bfWalk.pose{
+    transform: translateX(-50%) scale(1.2) translateY(120px);
+    transition: transform 0.5s ease;
+}
+
+#bfMic{
+    position: absolute;
+    bottom: 440.3px; /* adjust near mouth */
+    left: 49.9%;
+
+    width: 35px;
+
+    opacity: 0;
+    transform: translateX(-50%) scale(0.8);
+
+    transition: all 0.4s ease;
+    z-index: 6;
+}
+
+#bfMic.show{
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+}
+
+/* 💬 mic bubble */
+#bfMicBubble{
+    position: absolute;
+    bottom: 520px;
+    left: 52.8%;
+
+    background: #1e2a78; /* dark blue */
+    color: #fff6a8; /* light yellow */
+
+    padding: 6px 10px;
+    border-radius: 12px;
+
+    font-size: 13px;
+    font-weight: 400;
+
+    opacity: 0;
+    transform: translateX(-50%) scale(0.9);
+
+    transition: all 0.3s ease;
+    z-index: 6;
+}
+
+#bfMicBubble.show{
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+}
+
+.crowdHeart{
+    position: absolute;
+
+    font-size: 16px;
+
+    opacity: 0;
+    transform: translateY(10px) scale(0.8);
+
+    animation: heartFloat 3s ease forwards;
+
+    pointer-events: none;
+}
+
+/* 💕 float up + fade */
+@keyframes heartFloat{
+    0%{
+        opacity: 0;
+        transform: translateY(10px) scale(0.7);
+    }
+    20%{
+        opacity: 1;
+        transform: translateY(0px) scale(1);
+    }
+    100%{
+        opacity: 0;
+        transform: translateY(-60px) scale(1.1);
+    }
+}
+
+#bfWalk.lookLeft{
+    transform: translateX(-52%) scale(1.1) translateY(120px) rotateY(-40deg);
+    transition: transform 0.6s ease;
+}
+
+.namiRoom{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+
+    background: linear-gradient(135deg, #3d3470, #5a4fa3, #7a6bd6);
+}
+
+/* 📺 TV */
+.tv{
+    position: absolute;
+    width: 320px;
+    top: 19%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.namiCouch{
+    position: absolute;
+    width: 390px;
+    bottom: 11%;
+    left: 22%;
+    transform: translateX(-50%);
+
+    transition: opacity 1.5s ease;
+    pointer-events: none;
+}
+
+#normalCouch{ opacity: 1; }
+
+
+.couchLight{
+    position: absolute;
+    width: 99px;
+
+    bottom: 5%;
+    left: 15%;
+
+    opacity: 0.95;
+}
+
+#namiPage .pageGuide{
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 130px;
+    z-index: 99999;
+}
+
+.tvGlow {
+    position: absolute;
+    top: 23%; /* 👈 moved a bit DOWN from 19% */
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 340px;   /* 👈 bigger spread */
+    height: 210px;
+
+    pointer-events: none;
+    z-index: 1;
+
+    background: radial-gradient(
+        ellipse at center,
+        rgba(200, 150, 255, 0.65) 0%,   /* 👈 stronger glow */
+        rgba(170, 120, 255, 0.45) 35%,
+        rgba(140, 90, 255, 0.25) 60%,
+        rgba(100, 60, 220, 0.12) 80%,
+        transparent 100%
+    );
+
+    filter: blur(35px); /* 👈 softer + glowier */
+}
+
+/* ✨ subtle flicker (like TV changing scenes) */
+@keyframes tvFlicker{
+    0%   { opacity: 0.85; }
+    50%  { opacity: 1; }
+    100% { opacity: 0.88; }
+}
+
+.tvGlow{
+    animation: tvFlicker 3s infinite ease-in-out;
+}
+
+.tvReflection {
+    position: absolute;
+    top: 32%; /* 👈 slightly below TV glow */
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 420px;
+    height: 160px;
+
+    pointer-events: none;
+    z-index: 0;
+
+    background: radial-gradient(
+        ellipse at center,
+        rgba(170, 120, 255, 0.25) 0%,
+        rgba(140, 90, 255, 0.15) 40%,
+        rgba(100, 60, 200, 0.08) 65%,
+        transparent 100%
+    );
+
+    filter: blur(30px);
+}
+
+/* 🌸 Nami center placement */
+#namiCenter{
+    position: absolute;
+    bottom: 9%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    z-index: 50;
+}
+
+#namiCenterImg{
+    width: 175px; /* adjust based on your png */
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+
+.namiMenu{
+    position: absolute;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%) scale(0.8);
+    
+    background: rgba(255, 220, 235, 0.95);
+    backdrop-filter: blur(10px);
+
+    border-radius: 18px;
+    padding: 10px;
+
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+
+    box-shadow: 0 8px 25px rgba(255, 105, 180, 0.25);
+    z-index: 99999;
+
+    transition: all 0.25s ease;
+    pointer-events: auto;
+}
+
+.namiMenu.show{
+    display: flex;
+    transform: translateX(-50%) scale(1);
+}
+
+/* BUTTONS */
+.namiMenu button{
+    background: linear-gradient(135deg, #ffc0cb, #ff9bb8);
+    border: none;
+
+    padding: 8px 14px;
+    border-radius: 12px;
+
+    font-size: 12px;
+    color: #5a0033;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+/* hover = same pop feel */
+.namiMenu button:hover{
+    transform: scale(1.08);
+    box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3);
+}
+
+.namiCouch{
+    position: absolute;
+    width: 390px;
+    bottom: 11%;
+    left: 22%;
+    transform: translateX(-50%);
+
+    transition: opacity 1.5s ease;
+
+    pointer-events: none; /* prevents weird click blocking */
+}
+
+#namiHand{
+    position: absolute;
+    bottom: 20%;
+    right: 20%;
+
+    width: 70px;
+
+    opacity: 0;
+    transform: scale(0.8);
+
+    z-index: 9999;
+    cursor: grab;
+
+    transition: all 0.3s ease;
+}
+
+#namiBlanket{
+    position: absolute;
+    bottom: 18%;
+    left: 50%;
+    transform: translateX(-50%) scale(0.8);
+
+    width: 130px;
+
+    opacity: 0;
+
+    z-index: 9998;
+    cursor: grab;
+
+    transition: all 0.4s ease;
+}
+
+#cuddleCouch{
+    filter: drop-shadow(0 0 20px rgba(255, 150, 200, 0.25));
+}
+
+#cuddleCouch,
+#sleepCouch{
+    opacity: 0;
+    position: absolute;
+}
+
+#namiCouchBubble{
+    position: absolute;
+    bottom: 42%;   /* sits above couch nicely */
+    left: 26%;     /* matches couch position */
+    transform: translateX(-50%) scale(0.9);
+
+    max-width: 180px;
+    padding: 8px 12px;
+
+    font-size: 13px;
+    line-height: 1.3;
+
+    background: #ffe4f2;
+    color: #6b2c48;
+
+    border-radius: 16px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+
+    opacity: 0;
+    transition: all 0.4s ease;
+
+    text-align: center;
+    z-index: 25;
+}
+
+.fadeHidden{
+    opacity: 0;
+}
+
+.namiChair{
+    position: absolute;
+    width: 250px;          /* match your massage chair */
+    bottom: 15%;           /* match */
+    left: 72%;             /* match */
+    transform: translateX(-50%);
+    transition: opacity 1.5s ease;
+    pointer-events: none;
+}
+
+
+#namiMassageBubble{
+    position: absolute;
+    bottom: 49%;
+    left: 68%;
+    transform: translateX(-50%) scale(0.9);
+
+    max-width: 180px;
+    padding: 8px 12px;
+
+    font-size: 13px;
+
+    background: #ffe9f3;
+    color: #6b2c48;
+
+    border-radius: 16px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+
+    opacity: 0;
+    transition: all 0.4s ease;
+
+    text-align: center;
+    z-index: 25;
+}
+
+#namiGinger{
+    position: absolute;
+    width: 50px;
+
+    bottom: 32%;   /* tweak this slightly so it’s not EXACT same as blanket */
+    left: 60%;
+    transform: translateX(-50%) scale(0.8);
+
+    opacity: 0;
+    transition: all 0.4s ease;
+
+    z-index: 50; /* 🔥 ABOVE EVERYTHING */
+    pointer-events: auto; /* MUST be clickable */
+}
+
+#sadChair{
+    transform: translateX(-50%) scale(0.92); /* shrink slightly */
+}
+
+.namiHug{
+    position: absolute;
+    bottom: 9%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 180px;
+
+    opacity: 0;
+    transition: opacity 1.5s ease;
+
+    z-index: 10;
+}
+
+#namiHugBubble{
+    position: absolute;
+    bottom: 42%;
+    left: 50%;
+    transform: translateX(-50%) scale(0.95);
+
+    max-width: 180px;   /* smaller */
+    padding: 8px 12px;  /* tighter */
+    font-size: 13px;    /* slightly smaller */
+
+    border-radius: 14px; /* softer look */
+
+    line-height: 1.4;
+
+    background: #ffd6ec;
+    color: #7a2d4f;
+
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+
+    opacity: 0;
+    transition: all 0.4s ease;
+
+    text-align: center;
+    z-index: 20;
+    pointer-events: none;
+}
+
+#hugHearts{
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 15;
+    pointer-events: none;
+}
+
+.heart{
+    position: absolute;
+    font-size: 18px;
+    color: #ff6fa5;
+    animation: floatUp 3s linear forwards;
+}
+
+@keyframes floatUp{
+    0%{
+        transform: translateY(0) scale(0.8);
+        opacity: 1;
+    }
+    100%{
+        transform: translateY(-120px) scale(1.2);
+        opacity: 0;
+    }
+}
+
+.namiCarry{
+    position: absolute;
+    bottom: 9%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 200px;
+
+    opacity: 0;
+    transition: 
+        opacity 1s ease,
+        transform 2s linear; /* movement smooth */
+
+    z-index: 10;
+}
+
+/* 🌸 PAGE BASE */
+#flashcardsPage {
+  position: fixed;
+  inset: 0;
+
+  display: none; /* keep it hidden by default */
+  flex-direction: column;
+
+  overflow: hidden;
+  z-index: 50000;
+
+background: #e2e4ea;
+  padding: 20px;
+}
+
+#flashcardsPage.show {
+  display: flex;
+}
+
+/* 🧸 PINTEREST GRID */
+#cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+
+  gap: 10px;
+
+  width: 100%;
+  height: calc(100vh - 80px); /* fits screen nicely */
+  max-width: 900px;
+
+  margin: 0 auto;
+}
+
+.flashcard {
+  border-radius: 16px;
+  padding: 6px;
+  font-size: 13px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+font-weight: 600;           /* bold but not ugly-bold */
+  color: #4a3f3f;             /* softer dark for readability */
+  letter-spacing: 0.2px;
+
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6); /* soft lift effect */
+
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+
+.flashcard:hover {
+  transform: scale(1.03);
+}
+
+/* ✨ POPUP OVERLAY */
+#cardPopup {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(8px);
+  background: rgba(0,0,0,0.15);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s ease;
+}
+
+#cardPopup.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* 💌 POPUP BOX */
+#popupContent {
+  background: #fff8f6;
+  border-radius: 24px;
+  padding: 30px;
+  width: 80%;
+  max-width: 400px;
+  max-height: 70vh;
+overflow-y: auto;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+/* ❌ CLOSE */
+#closePopup {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* ✍️ TEXT */
+#popupText {
+  margin-top: 10px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #5a4b4b;
+  white-space: pre-wrap;
+}
+
+
+/* 🌸 SPOIL SCENE BASE */
+#spoilScene {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* 🧃 VENDING MACHINE */
+#spoilVending {
+  position: absolute;
+  right: 8%;
+  bottom: 12%;
+  width: 190px;
+  z-index: 5;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* ✨ idle glow */
+#spoilVending:hover {
+  transform: scale(1.03);
+  filter: drop-shadow(0 0 12px rgba(255, 180, 200, 0.6))
+          drop-shadow(0 0 25px rgba(255, 200, 220, 0.3));
+}
+
+/* 💖 CENTER NAMI (SPOIL VERSION) */
+#spoilNami {
+  position: absolute;
+  left: 50%;
+  bottom: 22%;
+  transform: translateX(-50%);
+  width: 200px;
+  z-index: 10;
+}
+
+/* 🧺 WASHING MACHINE */
+#spoilWashingMachine {
+  position: absolute;
+  left: 8%;
+  bottom: 7%;
+  width: 180px;
+  z-index: 5;
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+}
+
+/* 🫧 BUBBLE CONTAINER */
+#spoilPage #spoilBubbleContainer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.spoilbubble {
+  position: absolute;
+  border-radius: 50%;
+
+  /* ✨ real bubble look */
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.25),
+    rgba(255, 255, 255, 0.08)
+  );
+
+  /* 🫧 glassy shine */
+  box-shadow:
+    inset -6px -10px 18px rgba(255, 255, 255, 0.35),
+    inset 4px 6px 10px rgba(255, 255, 255, 0.2),
+    0 0 8px rgba(255, 255, 255, 0.15);
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  pointer-events: none;
+  animation: spoilFloatUp linear infinite;
+
+  /* ✨ softer feel */
+  filter: blur(0.2px);
+  opacity: 0.9;
+filter: blur(0.3px) drop-shadow(0 0 6px rgba(255,255,255,0.2));
+}
+
+@keyframes spoilFloatUp {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.9);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.9;
+  }
+
+  50% {
+    transform: translateY(-60vh) translateX(20px) scale(1.05);
+  }
+
+  100% {
+    transform: translateY(-120vh) translateX(-20px) scale(0.95);
+    opacity: 0;
+  }
+}
+
+#washFoam {
+  position: absolute;
+  left: 10%;
+  bottom: 10%;
+  width: 200px;
+  height: 200px;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.vendingMenu {
+  position: absolute;
+  right: 10%;
+  bottom: 30%;
+
+  width: 190px;
+  padding: 12px;
+
+  /* 🌸 soft readable pastel */
+  background: linear-gradient(145deg, #ffe0eb, #fff5f8);
+
+  border: 1px solid #ffb6c8;
+  border-radius: 16px;
+
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+
+  box-shadow:
+    0 10px 25px rgba(255, 105, 135, 0.18),
+    inset 0 0 10px rgba(255,255,255,0.6);
+
+  z-index: 9999;
+}
+
+.vendingMenu.show {
+  display: flex;
+}
+
+/* title */
+.menuTitle {
+  color: #ff5c8a;
+  font-size: 13px;
+  text-align: center;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.vendingMenu button {
+  background: rgba(255, 182, 193, 0.25);
+  border: 1px solid rgba(255, 105, 135, 0.25);
+
+  color: #b3124b;
+
+  padding: 8px;
+  border-radius: 12px;
+
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.vendingMenu button:hover {
+  transform: scale(1.05);
+  background: rgba(255, 182, 193, 0.45);
+}
+
+#doritosItem {
+  position: absolute;
+  width: 70px;
+
+  left: 82%;
+  bottom: 18%;
+
+  opacity: 0;
+  transform: scale(0.8);
+
+  z-index: 20;
+  cursor: grab;
+
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+#spoilNamiHappy {
+  position: absolute;
+  left: 50%;
+  bottom: 22%;
+  transform: translateX(-50%);
+  width: 200px;
+  z-index: 11;
+
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#spoilChatBubble{
+    position: absolute;
+    bottom: 57.7%;
+    left: 50%;
+    transform: translateX(-50%) scale(0.9);
+
+    max-width: 180px;
+    padding: 8px 12px;
+
+    font-size: 13px;
+
+    background: #ffe9f3;
+    color: #6b2c48;
+
+    border-radius: 16px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+
+    opacity: 0;
+    transition: all 0.4s ease;
+
+    text-align: center;
+    z-index: 25;
+}
+
+#icecreamItem{
+  position: absolute;
+  left: 82%;
+  bottom: 21%;
+  transform: translateX(-50%) scale(0.8);
+
+  width: 70px;   /* 💖 THIS is what fixes “gigantic” issue */
+  height: auto;
+
+  opacity: 0;
+  transition: 0.3s ease;
+
+  cursor: grab;
+  z-index: 999;
+}
+
+#frozennami{
+  position: absolute;
+  left: 50%;
+  bottom: 22%;
+  transform: translateX(-50%);
+  width: 200px;
+  opacity: 0;
+  transition: 0.4s ease;
+  z-index: 10;
+}
+
+#bananaItem{
+  position: absolute;
+  left: 82%;
+  bottom: 21%;
+  transform: translateX(-50%) scale(0.8);
+
+  width: 60px;   /* banana slightly bigger than ice cream */
+  height: auto;
+
+  opacity: 0;
+  transition: 0.3s ease;
+
+  cursor: grab;
+  z-index: 999;
+}
+
+#spoilNamiAngry{
+  position: absolute;
+  left: 50%;
+  bottom: 22%;
+  transform: translateX(-50%) scale(0.95);
+
+  width: 200px;   /* match your normal nami size */
+  height: auto;
+
+  opacity: 0;
+  transition: 0.4s ease;
+
+  z-index: 10;
+}
+
+#flowersItem{
+  position: absolute;
+  left: 82%;
+  bottom: 18%;
+  transform: translateX(-50%) scale(0.8);
+
+  width: 90px;
+  height: auto;
+
+  opacity: 0;
+  transition: 0.3s ease;
+
+  cursor: grab;
+  z-index: 999;
+}
+
+#lovenami{
+  position: absolute;
+  left: 50%;
+  bottom: 22%;
+  transform: translateX(-50%);
+
+  width: 200px;
+
+  opacity: 0;
+  transition: 0.4s ease;
+
+  z-index: 11;
+}
+
+#waterItem{
+  position: absolute;
+  left: 82%;
+  bottom: 18%;
+  transform: translateX(-50%) scale(0.8);
+
+  width: 90px;
+  height: auto;
+
+  opacity: 0;
+  transition: 0.3s ease;
+
+  cursor: grab;
+  z-index: 999;
+}
+
+#calmnami{
+  position: absolute;
+  left: 50%;
+  bottom: 22%;
+  transform: translateX(-50%);
+
+  width: 200px;
+
+  opacity: 0;
+  transition: 0.4s ease;
+
+  z-index: 11;
+}
+
+#cupnoodlesItem{
+  position: absolute;
+  left: 82%;
+  bottom: 19%;
+  transform: translateX(-50%) scale(0.8);
+
+  width: 90px;
+  height: auto;
+
+  opacity: 0;
+  transition: 0.3s ease;
+
+  cursor: grab;
+  z-index: 999;
+}
+
+#excitednami{
+  position: absolute;
+  left: 50%;
+  bottom: 22%;
+  transform: translateX(-50%);
+
+  width: 200px;
+
+  opacity: 0;
+  transition: 0.4s ease;
+
+  z-index: 11;
+}
+
+#teddyUI{
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.4s;
+}
+
+#teddyUI.show{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#viewBtn{
+    position: absolute;
+    bottom: 650px;
+    right: 600px;
+
+    background: #fff3e6;
+    border: none;
+    border-radius: 20px;
+
+    padding: 8px 14px;
+    font-size: 13px;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+#viewBtn:hover{
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+}
+
+#teddyMessages{
+    margin-top: 20px;
+    display: none;
+}
+
+.teddyMsg{
+    background: #fff8f6;
+    padding: 10px;
+    border-radius: 12px;
+    margin: 8px auto;
+    width: 250px;
+}
+
+/* 🧸 teddy block */
+.teddyWrap{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#teddyBear{
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.inputWrap{
+    position: relative;
+    margin-top: 20px;
+}
+
+/* ✍️ textarea glow */
+#teddyInput{
+    width: 280px;
+    height: 100px;
+    border-radius: 16px;
+    border: none;
+    padding: 12px 45px 12px 12px;
+    font-family: inherit;
+    background: #fff8f6;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    resize: none;
+    outline: none;
+}
+
+/* 💌 floating send button */
+#sendBtn{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+
+    font-size: 20px;
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+#sendBtn:hover{
+    transform: scale(1.2);
+}
+
+#teddyOldMessages{
+    margin-top: 15px;
+    max-height: 200px;
+    overflow-y: auto;
+    width: 250px;
+}
+
+.teddyMsg{
+    background: #fff3e6;
+    padding: 8px 12px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+#teddyModal{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4); /* dark blur vibe */
+    backdrop-filter: blur(6px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s ease;
+
+    z-index: 999999;
+}
+
+#teddyModal.show{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#teddyModalBox{
+    width: 300px;
+    max-height: 400px;
+
+    background: #fff3e6;
+    border-radius: 20px;
+    padding: 15px;
+
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+
+    display: flex;
+    flex-direction: column;
+}
+
+#teddyModalHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+#closeModal{
+    cursor: pointer;
+}
+
+#teddyModalContent{
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* 💬 each message */
+.teddyMsg{
+    background: white;
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+}
+
+.miniHeart{
+    position: absolute;
+    bottom: 20px;
+    font-size: 12px;
+    opacity: 0.8;
+
+    animation: floatUp 2s ease forwards;
+}
+
+@keyframes floatUp{
+    from{
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to{
+        transform: translateY(-80px);
+        opacity: 0;
+    }
+}
+
+@keyframes teddyWiggle{
+    0%   { transform: rotate(0deg); }
+    25%  { transform: rotate(-8deg); }
+    50%  { transform: rotate(8deg); }
+    75%  { transform: rotate(-6deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.teddy-wiggle{
+    animation: teddyWiggle 0.6s ease;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+</style>
+</head>
+<body class="day">
+
+<!-- INTRO -->
+<div id="intro">
+    <div id="introContent">
+        <h1 id="welcome">WELCOME HOME</h1>
+
+        <div id="luffy-wrap">
+            <img src="luffy.png" id="luffy">
+            <img src="luffy-eyes.png" id="luffy-eyes">
+        </div>
+
+        <div id="intro-bubble">
+            hii i'm luffy... i'll be with you throughout your stay here<br>click to start
+        </div>
+    </div>
+</div>
+
+<!-- HOME -->
+<div id="home">
+<div class="title">hii, my fav trader</div>
+<div class="toggle">
+<label><input type="radio" onclick="setDay()" checked> day mode</label>
+<label><input type="radio" onclick="setNight()"> night mode</label>
+</div>
+<div class="guide" onclick="nextGuide()">
+<img src="luffy.png">
+<div class="bubble" id="guideText">hii i'm luffy your guide click on me for more info</div>
+</div>
+<div class="playlist">
+<img src="playlist.png">
+<div class="controls">
+<button onclick="prevSong()">⏮</button>
+<button onclick="togglePlay()">⏯</button>
+<button onclick="nextSong()">⏭</button>
+</div>
+</div>
+<audio id="music"></audio>
+
+<div class="scene" id="scene">
+<div class="fireplace">
+<img src="fireplace-day.png" class="fire-day">
+<img src="fireplace-night.png" class="fire-night">
+</div>
+<div class="window" id="window">
+<img src="window-day.png" class="window-day">
+<img src="window-night.png" class="window-night">
+<div class="night-lightning" id="nightLightning"></div>
+</div>
+<div class="right-side">
+<div class="couch-area">
+<img src="bf-avatar.png" class="avatar-stand" id="avatarStand">
+<div class="couch">
+<img src="couch.png">
+<img src="bf-avatar.png" class="avatar-lay" id="avatarLay">
+<img src="blanket.png" class="blanket" id="blanket">
+</div>
+</div>
+<div class="table">
+<img src="table.png">
+<img src="laptop.png" class="laptop" id="laptop">
+</div>
+</div>
+</div>
+
+<div class="popup" id="popup">
+<button onclick="openBook()">open menu</button>
+<button onclick="closePopup()">lay down here</button>
+<button onclick="throwLaptopDelayed()">throw laptop</button>
+</div>
+</div>
+
+<!-- BOOK UI -->
+<div id="bookContainer">
+<div id="bookGuide">
+    <img src="luffy.png" id="bookLuffy">
+    <div id="bookBubble">
+    try hovering on your notes if you're confused what to select
+        </div>
+</div>
+
+   <!-- 🎧 ADD HERE -->
+    <div id="bookMusicControls">
+        <button onclick="prevSong()">⏮</button>
+        <button onclick="togglePlay()">⏯</button>
+        <button onclick="nextSong()">⏭</button>
+    </div>
+
+  <div id="book">
+
+
+    <!-- SPINE -->
+    <div id="spine">
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+    </div>
+
+    <!-- LEFT PAGE -->
+    <div class="page" id="leftPage"></div>
+
+    <!-- RIGHT PAGE -->
+<div class="page" id="rightPage">
+  <img src="crumpled-right.png" class="crumpledPage"> <!-- always visible -->
+  <div id="rightContent">
+  <div id="previewBox">
+    <img src="pin.png" class="pin"> <!-- cute top corner pin -->
+    <div id="previewBoxContent"></div>
+</div>
+
+    <!-- BUTTONS -->
+    <button id="prevButton">prev</button>
+    <button id="nextButton">next</button>
+
+  </div>
+
+</div>
+
+<!-- ✅ ADD THIS HERE -->
+
+    </div> <!-- rightPage -->
+  </div>   <!-- book -->
+</div>     <!-- bookContainer -->
+
+
+<div id="notesPage">
+
+<div id="notesGuide">
+    <img src="luffy.png" id="notesLuffy">
+    <div id="notesBubble">
+        tap the message to see something new :3
+    </div>
+</div>
+
+    <button id="backToBook">← back</button>
+
+    <div class="notesContent">
+
+    <div id="centerNotif" onclick="revealMessage()">
+    <div class="notif-header">
+        <span>MESSAGES</span>
+        <span>now</span>
+    </div>
+    <div id="notifText">tap to open</div>
+</div>
+
+ 
+</div>
+
+    </div>
+
+<div id="dodoPage">
+
+<div id="sleepUI">
+    <div id="sleepLabel">sleepiness</div>
+    <div id="sleepBar">
+        <div id="sleepFill"></div>
+    </div>
+</div>
+
+    <!-- guide -->
+    <div id="dodoGuide">
+        <img src="luffy.png" id="dodoLuffy">
+        <div id="dodoBubble">
+            click on the egg to see what comes out
+        </div>
+    </div>
+
+    <!-- egg center wrapper -->
+  
+    <div class="dodoCenter">
+    <img src="egg.png" id="dodoEgg">
+    <img src="blanket.png" id="babyBlanket">
+    <img src="hand.png" id="patHand">	
+
+   <div id="babyContainer">
+
+<div id="bottleContainer">
+    <img src="bottle1.png" class="bottle" id="bottleDodo">
+    <img src="bottle2.png" class="bottle" id="bottleDoll">
+</div>
+
+<div id="diaperContainer">
+    <img src="dirty1.png" class="diaper" id="diaper1">
+    <img src="dirty2.png" class="diaper" id="diaper2">
+
+    <img src="dustbin.png" id="dustbin">
+</div>
+
+<div id="cleanDiaperContainer">
+    <img src="clean1.png" class="diaper" id="clean1">
+    <img src="clean2.png" class="diaper" id="clean2">
+</div>
+
+    <div class="babyWrap" id="babyBoyWrap">
+        <img src="babyreveal.png" class="baby" id="babyBoy">
+        <div class="babyBubble purple" id="boyBubble">papa?</div>
+    </div>
+
+    <div class="babyWrap" id="babyGirlWrap">
+        <img src="babyreveal.png" class="baby" id="babyGirl">
+        <div class="babyBubble pink" id="girlBubble">daddy?</div>
+    </div>
+
+<div id="dodoActions">
+    <button class="dodoBtn" onclick="coverBabies()">cover babies with your hk blanket</button>
+    <button class="dodoBtn" onclick="enablePatMode()">pat babies</button>
+        <button class="dodoBtn" onclick="feedBabies()">feed formula</button>
+    <button class="dodoBtn" onclick="changeDiapers()">change diapers</button>
+</div>
+
+</div>
+</div>
+
+    <!-- back button -->
+    <button id="backToBookDodo">← back</button>
+
+</div>
+
+<div id="lightPage">
+<div id="lightDodoBubble"></div>
+
+<div id="namiChat" class="chatBubble">babyyyyy >.<</div>
+<div id="bfChat" class="chatBubble">its okay baby i'm here</div>
+
+    <!-- same Luffy guide -->
+    <div id="lightGuide">
+        <img src="luffy.png" id="lightLuffy">
+        <div id="lightBubble">
+        well look who we have here
+        </div>
+    </div>
+
+    <button id="backToBookLight">← back</button>
+
+<div id="lightMenu">
+    <button onclick="lightAction('pat')">🖐️ pat pat</button>
+    <button onclick="lightAction('fetch')">🦴 fetch</button>
+    <button onclick="lightAction('treat')">🍪 treat</button>
+    <button onclick="lightAction('bark')">🐾 bark</button>
+</div>
+
+<div id="lightDogBubble"></div>
+
+    <!-- 🌿 grass -->
+<img src="grass.png" class="grass g1">
+<img src="grass.png" class="grass g2">
+<img src="grass.png" class="grass g3">
+
+<!-- 🪨 stones -->
+<img src="stone.png" class="stone s1">
+<img src="stone.png" class="stone s2">
+
+    <!-- 🐶 Light sitting -->
+    <img src="light-sit.png" id="lightDog">
+    <img src="bf-avatar.png" id="bfAvatar" class="avatar">
+    <img src="scared-nami.png" id="namiAvatar" class="avatar">
+    <img src="trampoline.png" id="trampoline">
+    <img src="growndodo.png" id="growndodo">
+    <img src="hand.png" id="lightHand">
+    <img src="toy.png" id="fetchToy">
+    <img src="treat.png" id="dogTreat">
+
+<div id="namiChair">
+    <img src="nami-chair.png" id="namiChairImg">
+    <div id="namiChairBubble">dont mind me i'm just watching dodo</div>
+</div>
+
+</div>
+
+    </div>
+
+</div>
+
+<div id="redCarpetPage">
+
+<div id="guestArea">
+
+    <img src="limo.png" id="limo">
+
+    <div id="speedWrap">
+        <img src="speedAvatar.png" id="speedAvatar">
+    </div>
+
+    <div id="speedBubble"></div>
+
+</div>
+
+<img src="mic.png" id="bfMic">
+<div id="bfMicBubble">i'm taken</div>
+
+<div id="growndollBubble">thats my daddy</div>
+<div id="flashContainer"></div>
+
+<div id="flashOverlay"></div>
+
+<div id="bfMenu">
+
+    <div class="bfOption" onclick="bfAction('guest')">spawn a guest</div>
+    <div class="bfOption" onclick="bfAction('pose')">pose</div>
+    <div class="bfOption" onclick="bfAction('mic')">speak on mic</div>
+    <div class="bfOption" onclick="bfAction('look')">look at me</div>
+
+</div>
+
+    <!-- Luffy guide (same position) -->
+    <div id="redCarpetGuide">
+        <img src="luffy.png" id="redCarpetLuffy">
+        <div id="redCarpetBubble">
+             tap on your avatar to view options gng you the main character here
+        </div>
+    </div>
+
+    <button id="backToBookRed">← back</button>
+
+    <div id="redCarpetScene">
+
+    <!-- 🟥 Carpet -->
+    <img src="carpet.png" id="carpet">
+
+    <!-- 🧍 BF walking -->
+    <img src="bf-avatar.png" id="bfWalk">
+
+    <!-- 🧸 Growndoll -->
+    <img src="chair-doll.png" id="growndoll">
+
+    <!-- 👥 CROWD (BOTTOM) -->
+    <div id="crowdContainer">
+        <img src="crowd.png" class="crowdImg">
+        <div id="crowdBubbles"></div>
+    </div>
+
+</div>
+</div>
+
+<div id="namiPage" class="extraPage">
+
+<div class="pageGuide">
+    <img src="luffy.png">
+    <div class="pageBubble">tap on your gf's avatar shes getting clingy</div>
+</div>
+
+<div class="namiRoom">
+
+<div id="namiCenter">
+    <img src="nami.png" id="namiCenterImg">
+
+    <div id="namiWaitBubble">
+        
+    </div>
+</div>
+<div id="namiCouchBubble"></div>
+
+<img id="carryRight" src="carryright.png" class="namiCarry">
+<img id="carryLeft" src="carryleft.png" class="namiCarry">
+
+
+
+<div id="namiMenu" class="namiMenu">
+    <button onclick="startCouchCuddle()">cuddle on couch</button>
+    <button onclick="startMassageCuddle()">cuddle on massage chair</button>
+    <button onclick="startHug()">hug</button>
+    <button onclick="startCarry()">carry</button>
+</div>
+
+<img id="namiHug" src="hug.png" class="namiHug">
+
+<div id="hugHearts"></div>
+
+<div id="namiHugBubble"></div>
+
+<img id="massageChairBase" src="massage-chair.png" class="namiChair">
+
+<img id="sitChair" src="sitchair.png" class="namiChair fadeHidden">
+<img id="sadChair" src="sadchair.png" class="namiChair fadeHidden">
+
+<img id="namiGinger" src="ginger.png" class="namiGinger">
+
+<div id="namiMassageBubble"></div>
+
+    <!-- TV -->
+    <img src="tv.png" class="tv">
+    <div class="tvGlow"></div>
+     <div class="tvReflection"></div>
+
+    <!-- couch -->
+<img src="black-couch.png" id="normalCouch" class="namiCouch">
+<img src="cuddlecouch.png" id="cuddleCouch" class="namiCouch">
+<img src="sleepcouch.png" id="sleepCouch" class="namiCouch">
+<img id="namiHand" src="hand.png">
+<img id="namiBlanket" src="blanket.png">
+
+
+    <img src="light-sit.png" class="couchLight">
+
+</div>
+
+    <button class="backBtn" onclick="backToBookFromExtra()">← back</button>
+
+</div>
+
+<!-- FLASHCARDS PAGE -->
+<div id="flashcardsPage" class="extraPage">
+
+    <div class="pageGuide">
+        <img src="luffy.png">
+        <div class="pageBubble">it took a lot of words btw</div>
+    </div>
+
+    <div id="cardsContainer"></div>
+
+    <div id="cardPopup">
+        <div id="popupContent">
+            <span id="closePopup">✕</span>
+            <p id="popupText"></p>
+        </div>
+    </div>
+
+    <button class="backBtn" onclick="backToBookFromExtra()">← back</button>
+
+</div>
+
+
+<!-- SPOIL ME PAGE -->
+<div id="spoilPage" class="extraPage">
+
+    <div class="pageGuide">
+        <img src="luffy.png">
+        <div class="pageBubble">i'm just chilling with the washing machine gng</div>
+    </div>
+<div id="washFoam"></div>
+
+    <button class="backBtn" onclick="backToBookFromExtra()">← back</button>
+
+<img id="spoilVending" src="vending.png">
+
+<img id="spoilNami" src="nami.png">
+
+<img id="spoilWashingMachine" src="washing.png">
+
+<div id="spoilBubbleContainer"></div>
+
+<div id="spoilVendingMenu" class="vendingMenu">
+  <div class="menuTitle">pick one to give :3</div>
+
+  <button onclick="vendingPick('doritos')">doritos :3</button>
+  <button onclick="vendingPick('icecream')">ice cream :3</button>
+  <button onclick="vendingPick('banana')">banana :3</button>
+  <button onclick="vendingPick('flowers')">flowers :3</button>
+  <button onclick="vendingPick('water')">water :3</button>
+  <button onclick="vendingPick('cupnoodles')">cup noodles :3</button>
+</div>
+
+<img id="doritosItem" src="doritos.png">
+<img id="spoilNamiHappy" src="happynami.png">
+<div id="spoilChatBubble"></div>
+<img id="icecreamItem" src="icecream.png">
+<img id="frozennami" src="frozennami.png">
+<img id="bananaItem" src="banana.png">
+<img id="spoilNamiAngry" src="angrynami.png">
+<img id="flowersItem" src="flowers.png">
+<img id="lovenami" src="lovenami.png">
+<img id="waterItem" src="water.png">
+<img id="calmnami" src="calmnami.png">
+<img id="cupnoodlesItem" src="cupnoodles.png">
+<img id="excitednami" src="excitednami.png">
+
+</div>
+
+<!-- MESSAGE PAGE -->
+<div id="messagePage" class="extraPage">
+
+<div id="teddyModal">
+
+  <div id="teddyModalBox">
+
+    <div id="teddyModalHeader">
+      <span>your messages 🧸</span>
+      <div id="closeModal" onclick="closeTeddyModal()">✖</div>
+    </div>
+
+    <div id="teddyModalContent"></div>
+
+  </div>
+
+</div>
+
+    <div class="pageGuide">
+        <img src="luffy.png">
+        <div class="pageBubble">leave something cute for her</div>
+    </div>
+
+    <button class="backBtn" onclick="backToBookFromExtra()">← back</button>
+
+<div class="teddyWrap">
+    <img src="teddy.png" id="teddyBear">
+    <div id="teddyBubble">tap me :3</div>
+  </div>
+<div id="teddyOldMessages"></div>
+
+  <div id="teddyUI">
+
+    <div class="inputWrap">
+      <textarea id="teddyInput" placeholder="write something for me..."></textarea>
+
+      <!-- 💌 ICON BUTTON -->
+      <div id="sendBtn" onclick="saveTeddyMessage()">💌</div>
+    </div>
+
+<button id="viewBtn" onclick="openTeddyModal()">view old texts</button>
+  </div>
+
+<div id="viewTextsBtn" onclick="viewTeddyMessages()">💌</div>
+
+</div>
+</div>
+
+<script>
+
+
+/* ===== INTRO CLICK ===== */
+
+window.addEventListener("DOMContentLoaded", function(){
+
+
+
+        // 🔙 BACK BUTTON DIRECT FIX
+document.getElementById("backToBook").addEventListener("click", function(){
+    let book = document.getElementById("bookContainer");
+    let notes = document.getElementById("notesPage");
+
+
+    book.style.display = "flex";
+    book.style.opacity = "1";
+});
+
+    document.getElementById("nextButton").onclick = goNext;
+    document.getElementById("prevButton").onclick = goPrev;
+
+    let intro = document.getElementById("intro");
+    let home = document.getElementById("home");
+
+    intro.style.cursor = "pointer";
+
+    intro.onclick = function(){
+        intro.style.transition = "opacity 0.8s ease";
+        intro.style.opacity = "0";
+
+        setTimeout(() => {
+            intro.remove();
+            home.style.display = "block";
+        }, 800);
+    };
+
+    // 🌧️ ADD THIS HERE
+    for(let i=0;i<40;i++){
+        let drop=document.createElement("div");
+        drop.className="rain";
+        drop.style.left=Math.random()*100+"%";
+        drop.style.animationDelay=Math.random()+"s";
+        document.getElementById("window").appendChild(drop);
+    }
+
+});
+
+
+     
+/* ===== GUIDE ===== */
+function nextGuide(){
+    document.getElementById("guideText").innerText= "try clicking on your avatar and playing some music 🎧";
+}
+
+
+/* ===== LIGHTNING ===== */
+setInterval(() => {
+    if (document.body.classList.contains("night")) {
+
+        const lightning = document.getElementById("nightLightning");
+        if (!lightning) return;
+
+        lightning.classList.add("active");
+
+        setTimeout(() => {
+            lightning.classList.remove("active");
+        }, 300);
+    }
+}, 4000);
+
+/* ===== AVATAR + MENU ===== */
+let isLaying=false;
+function openMenuFlow(){
+    let stand=document.getElementById("avatarStand");
+    let lay=document.getElementById("avatarLay");
+    let blanket=document.getElementById("blanket");
+    let popup=document.getElementById("popup");
+    let scene=document.getElementById("scene");
+    if(!isLaying){
+        stand.style.display="none";
+        lay.style.display="block";
+        setTimeout(()=>{
+            blanket.style.display="block";
+            setTimeout(()=>{blanket.classList.add("show");},50);
+        },800);
+        isLaying=true;
+        setTimeout(()=>{
+            popup.style.display="flex";
+            scene.classList.add("blur");
+        },2200);
+    }else{
+        popup.style.display="flex";
+        scene.classList.add("blur");
+    }
+}
+document.getElementById("avatarStand").onclick=openMenuFlow;
+document.getElementById("avatarLay").onclick=openMenuFlow;
+
+/* ===== POPUP ===== */
+function closePopup(){
+    document.getElementById("popup").style.display="none";
+    document.getElementById("scene").classList.remove("blur");
+}
+
+/* ===== LAPTOP ===== */
+function throwLaptopDelayed(){
+    closePopup();
+    setTimeout(()=>{
+        let laptop=document.getElementById("laptop");
+        laptop.style.transform="translateX(-450px) translateY(-180px) rotate(-25deg)";
+        setTimeout(()=>laptop.style.opacity="0",800);
+    },400);
+}
+
+/* ===== MUSIC ===== */
+let songs=["song1.mp3","song2.mp3","song3.mp3","song4.mp3","song5.mp3","song6.mp3","song7.mp3","song8.mp3","song9.mp3","song10.mp3"];
+let music=document.getElementById("music");
+let index=0;
+function playSong(){music.src=songs[index];music.play();}
+music.addEventListener("ended",()=>{index=(index+1)%songs.length;playSong();});
+function togglePlay(){music.paused?music.play():music.pause();}
+function nextSong(){index=(index+1)%songs.length;playSong();}
+function prevSong(){index=(index-1+songs.length)%songs.length;playSong();}
+window.addEventListener("load", function(){
+    playSong();
+});
+
+/* ===== DAY NIGHT ===== */
+function setDay(){document.body.className="day";}
+function setNight(){document.body.className="night";}
+
+/* ===== OPEN BOOK ===== */
+function openBook(){
+    let book = document.getElementById("bookContainer");
+    let home = document.getElementById("home");
+
+    // preload page 1 immediately BEFORE showing book
+    loadPage(1);
+    
+    book.style.display = "flex";
+    
+    document.getElementById("bookGuide").style.display = "block";
+    document.getElementById("bookMusicControls").style.display = "flex";
+
+    home.style.transition = "opacity 0.8s ease";
+    home.style.opacity = "0";
+
+    setTimeout(() => {
+        home.style.display = "none";
+    }, 800);
+}
+
+
+function closeBook(){
+    document.getElementById("bookContainer").style.display = "none";
+    document.getElementById("home").style.display = "block";
+
+    document.getElementById("bookGuide").style.display = "none";
+    document.getElementById("bookMusicControls").style.display = "none";
+}
+    
+
+/* ===== BOOK PAGE TURN ===== */
+
+let currentPage = 1;
+
+function goNext(){
+    if(currentPage === 1){
+        currentPage = 2;
+        loadPage(2);
+    }
+}   
+
+function goPrev(){
+    if(currentPage === 2){
+        currentPage = 1;
+        loadPage(1);
+    }
+}
+
+
+
+/* ===== BOOK PAGES CONTENT ===== */
+
+function loadPage(page){
+    let left = document.getElementById("leftPage");
+    let right = document.getElementById("rightPage");
+
+    if(page === 1){
+        left.innerHTML = `
+            <img src="crumpled-left.png" class="crumpledPage">
+
+            <div class="stickyNote" id="note1" style="background:url('stickynote-1.png') center/cover;">
+                <span class="noteText">notes</span>
+            </div>
+
+            <div class="stickyNote" id="note2" style="background:url('stickynote-2.png') center/cover;">
+                <span class="noteText">dodo</span>
+            </div>
+
+            <div class="stickyNote" id="note3" style="background:url('stickynote-3.png') center/cover;">
+                <span class="noteText">light</span>
+            </div>
+
+            <div class="stickyNote" id="note4" style="background:url('stickynote-4.png') center/cover;">
+                <span class="noteText">red carpet</span>
+            </div>
+        `;
+    }
+
+setTimeout(() => {
+    const note2 = document.getElementById("note2");
+    if(note2){
+        note2.onclick = openDodoPage;
+    }
+}, 0);
+
+setTimeout(() => {
+    const note3 = document.getElementById("note3");
+    if(note3){
+        note3.onclick = openLightPage;
+    }
+}, 0);
+
+setTimeout(() => {
+    const note4 = document.getElementById("note4");
+    if(note4){
+        note4.onclick = openRedCarpetPage;
+    }
+}, 0);
+
+
+    if(page === 2){
+        left.innerHTML = `
+            <img src="crumpled-left.png" class="crumpledPage">
+
+            <div class="stickyNote" id="note5" style="background:url('stickynote-5.png') center/cover;">
+                <span class="noteText">nami</span>
+            </div>
+
+            <div class="stickyNote" id="note6" style="background:url('stickynote-6.png') center/cover;">
+                <span class="noteText">flashcards</span>
+            </div>
+
+            <div class="stickyNote" id="note7" style="background:url('stickynote-7.png') center/cover;">
+                <span class="noteText">spoil me</span>
+            </div>
+
+            <div class="stickyNote" id="note8" style="background:url('stickynote-8.png') center/cover;">
+                <span class="noteText">message</span>
+            </div>
+        `;
+    }
+
+// IMPORTANT: run this AFTER notes exist
+enableHoverPreview();
+}
+
+// ===== HOVER PREVIEW BOX =====
+
+function enableHoverPreview(){
+    const notes = document.querySelectorAll('.stickyNote');
+    const previewContent = document.getElementById('previewBoxContent');
+    const bookBubble = document.getElementById('bookBubble');
+
+    const contentMap = {
+        notes: `<img src="notes.png" style="width:500px;">`,
+        dodo: `<img src="dodo.png" style="width:250px;">`,
+        light: `<img src="light.png" style="width:400px;">`,
+        redcarpet: `<img src="redCarpet.png" style="width:280px;">`,
+        nami: `<img src="nami.png" style="width:170px;">`,
+        flashcards: `<img src="flashcards.png" style="width:190px;">`,
+        spoilme: `<img src="spoilMe.png" style="width:200px;">`,
+        message: `<img src="message.png" style="width:190px;">`
+    };
+
+   const luffyMap = {
+    notes: "aww nami misses you too",
+    dodo: "ugh this baby cries alot nowadays, maybe change its diaper",
+    light: "nami is prolly scared of him",
+    redcarpet: "isnt this some aura farming?",
+    nami: "she gave special orders to convince you to click on it",
+    flashcards: "that looks interesting",
+    spoilme: "she's asking for it",
+    message: "joyboy joyboy joyboy luffy"
+};
+
+    notes.forEach(note => {
+        note.addEventListener('mouseenter', () => {
+            const key = note.querySelector('.noteText').innerText.toLowerCase().replace(/\s/g,'');
+            previewContent.innerHTML = contentMap[key] || `<p>Nothing here yet!</p>`;
+
+            previewContent.style.opacity = 1;
+            previewContent.style.transform = "scale(1)";
+         
+            bookBubble.innerText = luffyMap[key] || "hmm...";
+            bookBubble.style.transform = "scale(1.05)";
+        });
+
+        note.addEventListener('mouseleave', () => {
+            previewContent.style.opacity = 0;
+            previewContent.style.transform = "scale(0.95)";
+
+            setTimeout(()=>{previewContent.innerHTML = '';}, 300);
+   
+           // 🐒 Luffy idle dialogue
+    bookBubble.innerText = "the music is cool 🎧";
+        });
+    });
+}
+
+// ===== OPEN NOTES PAGE =====
+
+function openNotesPage(){
+    let book = document.getElementById("bookContainer");
+    let notes = document.getElementById("notesPage");
+
+    book.style.display = "none";
+    notes.classList.add("show");
+}
+
+// 🧠 GLOBAL CLICK HANDLER (NO MORE HAUNTING)
+document.addEventListener("click", function(e){
+    let book = document.getElementById("bookContainer");
+    let notes = document.getElementById("notesPage");
+
+    // OPEN NOTES (note1 only)
+    if(e.target.closest(".stickyNote") && e.target.closest(".stickyNote").id === "note1"){
+        book.style.display = "none";
+        notes.style.display = "flex";
+        notes.style.opacity = "1";
+
+        startNotesLuffyDialogue();
+    }
+
+// OPEN NAMI (note5)
+if(e.target.closest(".stickyNote") && e.target.closest(".stickyNote").id === "note5"){
+    book.style.display = "none";
+
+    const namiPage = document.getElementById("namiPage");
+    const img = document.getElementById("namiCenterImg");
+    const bubble = document.getElementById("namiWaitBubble");
+
+    namiPage.style.display = "flex";
+
+    // reset first
+    img.style.opacity = "0";
+    bubble.style.opacity = "0";
+    bubble.style.transform = "translateY(20px)";
+
+    // fade in after 3s
+    setTimeout(() => {
+        img.style.transition = "opacity 1.5s ease";
+        bubble.style.transition = "opacity 1.5s ease, transform 1.5s ease";
+
+        img.style.opacity = "1";
+        bubble.style.opacity = "1";
+        bubble.style.transform = "translateY(0)";
+    }, 3000);
+}
+
+// OPEN FLASHCARDS (note6)
+if(e.target.closest(".stickyNote") && e.target.closest(".stickyNote").id === "note6"){
+    book.style.display = "none";
+    document.getElementById("flashcardsPage").style.display = "flex";
+}
+
+// OPEN SPOIL ME (note7)
+if(e.target.closest(".stickyNote") && e.target.closest(".stickyNote").id === "note7"){
+    book.style.display = "none";
+    document.getElementById("spoilPage").style.display = "flex";
+startWashMachineBubbles();
+startSpoilBubbles(); // keep your background bubbles too
+}
+
+// OPEN MESSAGE PAGE (note8)
+if(e.target.closest(".stickyNote") && e.target.closest(".stickyNote").id === "note8"){
+    book.style.display = "none";
+    document.getElementById("messagePage").style.display = "flex";
+}
+
+    // BACK BUTTON
+    if(e.target.closest("#backToBook")){
+        notes.style.display = "none";
+        book.style.display = "flex";
+        book.style.opacity = "1";
+    }
+});
+
+const notifMessages = [
+  "godi lo ༼ つ ◕_◕ ༽つ",
+  "dyt mai pagal hu?",
+  "kaha gye oye",
+  "chotu baby hu",
+  "do you love me?",
+  "would you still love me if i was a...",
+  "i love you sm :<",
+  "abhi mai choti hu",
+  "i missed you",
+  "i'm always here for you",
+  "mhu good girl :3",
+  "tumhari betu hu",
+  "go ahead and leave your pretty gf's texts on delivered",
+  "roungi",
+  "jao katti bye hmph -.-"
+];
+
+const rareMessages = [
+  "you’re my favorite person",
+  "i’m really really glad i have you",
+  "don’t ever leave me okay :<",
+  "you're my safe space :>"
+];
+
+function revealMessage(){
+    const box = document.getElementById("notifText");
+
+    let random;
+
+    if(Math.random() < 0.15){
+        random = rareMessages[Math.floor(Math.random() * rareMessages.length)];
+    } else {
+        random = notifMessages[Math.floor(Math.random() * notifMessages.length)];
+    }
+
+    box.innerText = random;
+}
+
+let notesLuffyTimeout;
+
+function startNotesLuffyDialogue() {
+    const bubble = document.getElementById("notesBubble");
+
+    // 1st message (immediate)
+    bubble.innerText = "click on the box to receive more texts";
+
+    // 2nd message after 3 seconds
+    setTimeout(() => {
+        bubble.innerText = "doesn't she say these all the time?";
+    }, 3000);
+
+    // 3rd message after 6 seconds total
+    setTimeout(() => {
+        bubble.innerText = "even i've memorized them atp";
+    }, 6000);
+}
+
+// OPEN DODO PAGE
+function openDodoPage(){
+    document.getElementById("bookContainer").style.display = "none";
+
+    let dodo = document.getElementById("dodoPage");
+    dodo.classList.add("show");
+}
+
+// BACK TO BOOK
+document.addEventListener("click", function(e){
+    if(e.target.id === "backToBookDodo"){
+        document.getElementById("dodoPage").classList.remove("show");
+        document.getElementById("bookContainer").style.display = "flex";
+    }
+});
+
+function openLightPage(){
+    document.getElementById("bookContainer").style.display = "none";
+
+    let page = document.getElementById("lightPage");
+    page.classList.add("show");
+
+    startLightScene(); // 👈 ADD THIS
+}
+
+document.addEventListener("click", function(e){
+    if(e.target.id === "backToBookLight"){
+        document.getElementById("lightPage").classList.remove("show");
+        document.getElementById("bookContainer").style.display = "flex";
+    }
+});
+
+// OPEN RED CARPET PAGE
+function openRedCarpetPage(){
+    document.getElementById("bookContainer").style.display = "none";
+
+    let page = document.getElementById("redCarpetPage");
+    page.classList.add("show");
+
+    startRedCarpetScene(); // 👈 ADD THIS
+}
+
+// BACK TO BOOK
+document.addEventListener("click", function(e){
+    if(e.target.id === "backToBookRed"){
+        document.getElementById("redCarpetPage").classList.remove("show");
+        document.getElementById("bookContainer").style.display = "flex";
+    }
+});
+
+function backToBookFromExtra(){
+    document.getElementById("bookContainer").style.display = "flex";
+    document.getElementById("namiPage").style.display = "none";
+}
+
+function backToBookFromExtra(){
+    document.getElementById("bookContainer").style.display = "flex";
+
+    document.getElementById("namiPage").style.display = "none";
+    document.getElementById("flashcardsPage").style.display = "none";
+}
+
+function backToBookFromExtra(){
+    document.getElementById("bookContainer").style.display = "flex";
+
+    document.getElementById("namiPage").style.display = "none";
+    document.getElementById("flashcardsPage").style.display = "none";
+    document.getElementById("spoilPage").style.display = "none"; // 👈 ADD THIS
+}
+
+function backToBookFromExtra(){
+    document.getElementById("bookContainer").style.display = "flex";
+
+    document.getElementById("namiPage").style.display = "none";
+    document.getElementById("flashcardsPage").style.display = "none";
+    document.getElementById("spoilPage").style.display = "none";
+    document.getElementById("messagePage").style.display = "none"; // 👈 FINAL ONE
+}
+
+// 🥚 EGG CLICK (TEST PHASE)
+document.addEventListener("click", function(e){
+    if(e.target.id === "dodoEgg"){
+        document.getElementById("dodoBubble").innerText = "wait... something's happening 👀";
+    }
+});
+
+document.addEventListener("click", function(e){
+
+    if(e.target.id === "dodoEgg"){
+
+        const egg = document.getElementById("dodoEgg");
+        const container = document.getElementById("babyContainer");
+        const bubble = document.getElementById("dodoBubble");
+
+        egg.classList.add("cracking");
+
+        setTimeout(() => {
+
+            egg.style.display = "none";
+            container.style.display = "flex";
+
+            // fixed story logic
+            document.getElementById("babyBoy").style.display = "block";
+            document.getElementById("babyGirl").style.display = "block";
+
+            bubble.innerText = "try clicking on your babies to move forward btw";
+
+        }, 500);
+    }
+});
+
+document.getElementById("dodoActions").classList.add("show");
+document.getElementById("sleepUI").style.opacity = "1";
+
+let boyClicks = 0;
+let girlClicks = 0;
+
+document.addEventListener("click", function(e){
+
+    // 💜 boy baby
+    if(e.target.id === "babyBoy"){
+        const bubble = document.getElementById("boyBubble");
+
+        const boyTexts = [
+            "papa?",
+            "are you there?",
+            "hold me..."
+        ];
+
+        bubble.innerText = boyTexts[boyClicks % boyTexts.length];
+        boyClicks++;
+    }
+
+    // 💗 girl baby
+    if(e.target.id === "babyGirl"){
+        const bubble = document.getElementById("girlBubble");
+
+        const girlTexts = [
+            "daddy?",
+            "don't go...",
+            "i'm sleepy :<"
+        ];
+
+        bubble.innerText = girlTexts[girlClicks % girlTexts.length];
+        girlClicks++;
+    }
+});
+
+let sleep = 0;
+
+function updateSleep(amount){
+    if(sleep >= 100) return;  // 👈 prevents re-trigger spam
+    sleep = Math.min(100, sleep + amount);
+
+    document.getElementById("sleepFill").style.width = sleep + "%";
+
+    if(sleep > 20){
+        document.getElementById("sleepUI").style.opacity = "1";
+    }
+
+    if(sleep >= 100){
+        babiesSleep();
+    }
+}
+
+function patBabies(){
+    updateSleep(15);
+
+    document.getElementById("dodoBubble").innerText =
+        "pat pat... they're calming down :3";
+}
+
+function feedBabies(){
+    updateSleep(20);
+
+    document.getElementById("dodoBubble").innerText =
+        "i think the babies like you gng";
+
+    showBottles();
+}
+
+function changeDiapers(){
+    updateSleep(10);
+
+    document.getElementById("dodoBubble").innerText =
+        "fresh & clean now";
+}
+
+function babiesSleep(){
+console.log("SLEEP TRIGGERED");
+    const boy = document.getElementById("boyBubble");
+    const girl = document.getElementById("girlBubble");
+
+    const boyImg = document.getElementById("babyBoy");
+    const girlImg = document.getElementById("babyGirl");
+
+    // 💖 initial sleepy dialogue
+    boy.innerText = "dad you're the best";
+girl.innerText = "i'm so proud of you daddy";
+
+    document.getElementById("dodoBubble").innerText =
+        "nami told me she's proud of you too btw";
+
+    boyImg.style.opacity = "0.6";
+    girlImg.style.opacity = "0.6";
+
+    document.getElementById("dodoActions").style.pointerEvents = "none";
+
+    // 🌙 GOODNIGHT
+setTimeout(() => {
+
+    boy.innerText = "goodnight daddy";
+    girl.innerText = "goodnight daddy";
+
+    // 😴 WAIT AFTER GOODNIGHT
+    setTimeout(() => {
+
+        // 🌅 GOOD MORNING
+
+        const blanket = document.getElementById("babyBlanket");
+if (blanket) {
+    blanket.style.transition = "all 1.5s ease";
+    blanket.style.opacity = "0";
+}
+
+        // pause so user FEELS it
+        setTimeout(() => {
+
+            // 👶➡️🧑 TRANSITION STARTS HERE
+            boyImg.style.opacity = "0";
+            girlImg.style.opacity = "0";
+
+            setTimeout(() => {
+
+                boyImg.src = "growndodo.png";
+                girlImg.src = "growndoll.png";
+
+                boyImg.style.opacity = "1";
+                girlImg.style.opacity = "1";
+
+                // size
+                boyImg.style.width = "240px";
+                girlImg.style.width = "200px";
+
+                // 💬 FINAL DIALOGUE
+                setTimeout(() => {
+                    boy.innerText = "we're off to school now dad";
+                    girl.innerText = "bai bai love you daddy :3";
+                }, 1000);
+
+                // 🌫️ VANISH
+setTimeout(() => {
+
+    boyImg.style.transition = "all 2.5s ease";
+    girlImg.style.transition = "all 2.5s ease";
+
+    boyImg.style.opacity = "0";
+    girlImg.style.opacity = "0";
+
+    // ⭐ ADD THIS
+    boy.style.transition = "opacity 2.5s ease";
+    girl.style.transition = "opacity 2.5s ease";
+
+    boy.style.opacity = "0";
+    girl.style.opacity = "0";
+
+}, 4500);
+            }, 800);
+
+        }, 2000); // ← holds GOOD MORNING on screen
+
+    }, 2500); // ← gap after GOODNIGHT
+
+}, 2000);
+}
+
+function coverBabies(){
+    updateSleep(25);
+
+    document.getElementById("dodoBubble").innerText =
+        "nami's fav blanket";
+
+    const blanket = document.getElementById("babyBlanket");
+    blanket.classList.add("show");
+}
+let blanketPicked = false;
+
+const blanket = document.getElementById("babyBlanket");
+
+blanket.addEventListener("click", pickBlanket);
+
+function pickBlanket(){
+    blanketPicked = true;
+
+    document.getElementById("dodoBubble").innerText =
+        "now place it on the babies 🧸";
+
+    blanket.style.transform = "scale(1.08)";
+}
+
+document.getElementById("babyBoyWrap").addEventListener("click", placeBlanket);
+document.getElementById("babyGirlWrap").addEventListener("click", placeBlanket);
+
+function placeBlanket(){
+    if(!blanketPicked) return;
+
+    blanketPicked = false;
+
+    const blanket = document.getElementById("babyBlanket");
+
+    blanket.style.transition = "all 0.8s ease";
+
+    blanket.style.left = "50%";
+    blanket.style.top = "60%";
+    blanket.style.transform = "translate(-50%, -50%) scale(1)";
+
+    reactBabiesToBlanket();
+}
+
+function reactBabiesToBlanket(){
+
+    const dodoBubble = document.getElementById("boyBubble");
+    const dollBubble = document.getElementById("girlBubble");
+
+    setTimeout(() => {
+        dodoBubble.innerText = "warmy";
+        dollBubble.innerText = "thanks daddy";
+
+        dodoBubble.style.transform = "scale(1.1)";
+        dollBubble.style.transform = "scale(1.1)";
+
+        setTimeout(() => {
+            dodoBubble.style.transform = "scale(1)";
+            dollBubble.style.transform = "scale(1)";
+        }, 300);
+
+    }, 300);
+
+    updateSleep(30); // if your sleep meter exists
+}
+
+let patMode = false;
+let patCount = 0;
+
+let lightPatMode = false;
+let lightPatCount = 0;
+
+
+function enablePatMode(){
+
+    patMode = true;
+
+    const hand = document.getElementById("patHand");
+
+    hand.style.opacity = "1";
+    hand.style.transform = "scale(1)";
+
+    document.getElementById("dodoBubble").innerText =
+        "drag the hand onto the babies to pat them 🖐️";
+
+    enableDrag(hand);
+resetIdleTimer();
+}
+function enableDrag(el){
+
+    let isDragging = false;
+    let offsetX, offsetY;
+
+    el.onmousedown = function(e){
+        isDragging = true;
+
+        offsetX = e.clientX - el.getBoundingClientRect().left;
+        offsetY = e.clientY - el.getBoundingClientRect().top;
+
+        el.style.transition = "none";
+        resetIdleTimer();
+    };
+
+    document.onmousemove = function(e){
+        if(!isDragging) return;
+
+        el.style.left = (e.clientX - offsetX) + "px";
+        el.style.top = (e.clientY - offsetY) + "px";
+
+        el.style.right = "auto";
+        el.style.bottom = "auto";
+        resetIdleTimer();
+    };
+
+    document.onmouseup = function(){
+        isDragging = false;
+        el.style.transition = "0.2s ease";
+
+        checkPatDrop();
+    };
+}
+function checkPatDrop(){
+
+    const hand = document.getElementById("patHand");
+
+    const dodo = document.getElementById("babyBoy");
+    const doll = document.getElementById("babyGirl");
+
+    const handRect = hand.getBoundingClientRect();
+
+    [dodo, doll].forEach(baby => {
+
+        const rect = baby.getBoundingClientRect();
+
+        const overlap =
+            handRect.left < rect.right &&
+            handRect.right > rect.left &&
+            handRect.top < rect.bottom &&
+            handRect.bottom > rect.top;
+
+        if(overlap){
+            patBabies();
+        }
+    });
+}
+function patBabies(){
+
+    if(!patMode) return;
+
+    patCount++;
+
+    const dodo = document.getElementById("boyBubble");
+    const doll = document.getElementById("girlBubble");
+
+    // bounce
+    dodo.style.transform = "scale(1.1)";
+    doll.style.transform = "scale(1.1)";
+
+    setTimeout(() => {
+        dodo.style.transform = "scale(1)";
+        doll.style.transform = "scale(1)";
+    }, 200);
+
+   updateSleep(3);
+
+    if(patCount === 1){
+        dodo.innerText = "sadjoad";
+        doll.innerText = "awoeidj";
+    }
+    else if(patCount === 3){
+        dodo.innerText = "i love you daddy";
+        doll.innerText = "i love daddy more";
+    }
+    else if(patCount === 5){
+        dodo.innerText = "i love mamma more";
+        doll.innerText = "i love mamma too";
+    }
+    else if(patCount === 8){
+        dodo.innerText = "daddy loves mamma too";
+        doll.innerText = "daddy loves us too";
+    }
+}
+
+const egg = document.getElementById("dodoEgg");
+const babyContainer = document.getElementById("babyContainer");
+
+let clicked = 0;
+
+egg.addEventListener("click", () => {
+    clicked++;
+
+    egg.classList.add("cracking");
+
+    // after a few clicks, hatch
+    if (clicked >= 3) {
+        setTimeout(() => {
+            egg.style.display = "none";
+            babyContainer.style.display = "flex";
+        }, 800);
+    }
+});
+
+const bottleDodo = document.getElementById("bottleDodo");
+const bottleDoll = document.getElementById("bottleDoll");
+
+const dodoText = document.getElementById("boyBubble");
+const dollText = document.getElementById("girlBubble");
+
+function showBottles(){
+    document.getElementById("bottleContainer").classList.add("show");
+  resetIdleTimer();
+}
+
+function feedBaby(bottle, textEl, message, xMove){
+
+bottle.onclick = () => {
+
+    // prevent re-use
+    bottle.onclick = null;
+
+    const baby = (bottle.id === "bottleDodo")
+        ? document.getElementById("babyBoy")
+        : document.getElementById("babyGirl");
+
+    const babyRect = baby.getBoundingClientRect();
+    const bottleRect = bottle.getBoundingClientRect();
+
+    const x = babyRect.left - bottleRect.left + 45;
+    const y = babyRect.top - bottleRect.top + 50;
+
+    bottle.style.transition = "0.6s ease";
+
+    bottle.style.transform =
+        `translate(${x}px, ${y}px) scale(1.2)`;
+
+    resetIdleTimer();
+
+    setTimeout(() => {
+        textEl.innerText = message;
+    }, 400);
+
+    setTimeout(() => {
+        bottle.style.transform = "translate(0px, 0px)";
+        
+        // ✨ disappear after use
+        bottle.style.opacity = "0";
+        bottle.style.pointerEvents = "none";
+        bottle.style.transition = "0.3s ease";
+    }, 1200);
+};
+}
+
+// attach
+feedBaby(bottleDodo, dodoText, "i feel stronk already", -40);
+feedBaby(bottleDoll, dollText, "nomnomnom", 40);
+
+function changeDiapers(){
+    updateSleep(10);
+
+    const bubble = document.getElementById("dodoBubble");
+    bubble.innerText = "cleaning time ✨";
+
+    const dirtyBox = document.getElementById("diaperContainer");
+    const cleanBox = document.getElementById("cleanDiaperContainer");
+
+    const diaper1 = document.getElementById("diaper1");
+    const diaper2 = document.getElementById("diaper2");
+    const dustbin = document.getElementById("dustbin");
+
+    // STEP 1: show dirty diapers + bin
+    dirtyBox.style.display = "flex";
+
+    let removed = 0;
+
+    function throwToBin(diaper){
+        diaper.onclick = () => {
+            diaper.style.transform = "translateY(-30px) scale(0.8)";
+            diaper.style.opacity = "0";
+
+            removed++;
+
+            if(removed === 2){
+                setTimeout(() => {
+                    dirtyBox.style.display = "none";
+                    startCleanDiapers();
+                }, 400);
+            }
+        };
+    }
+
+    throwToBin(diaper1);
+    throwToBin(diaper2);
+
+    function startCleanDiapers(){
+        bubble.innerText = "now put on clean diapers :3";
+
+        cleanBox.style.display = "flex";
+
+        const c1 = document.getElementById("clean1");
+        const c2 = document.getElementById("clean2");
+
+        let placed = 0;
+
+        function apply(diaper){
+            diaper.onclick = () => {
+                diaper.style.transform = "scale(1.2)";
+                diaper.style.opacity = "0";
+
+                showSparkles();
+
+                placed++;
+
+                if(placed === 2){
+                    setTimeout(() => {
+                        cleanBox.style.display = "none";
+                        bubble.innerText = "all clean now";
+                    }, 300);
+                }
+            };
+        }
+
+        apply(c1);
+        apply(c2);
+    }
+}
+
+function showSparkles(){
+    for(let i = 0; i < 5; i++){   // 👈 reduced from 12 to 5
+
+        const s = document.createElement("div");
+        s.innerText = "✨";
+
+        s.style.position = "absolute";
+        s.style.left = (window.innerWidth / 2 + (Math.random() * 80 - 40)) + "px";
+        s.style.top = (window.innerHeight / 2 + (Math.random() * 80 - 40)) + "px";
+
+        s.style.fontSize = "18px";   // slightly smaller
+        s.style.zIndex = "99999";
+        s.style.pointerEvents = "none";
+        s.style.opacity = "0.8";
+
+        document.body.appendChild(s);
+
+        setTimeout(() => s.remove(), 600);
+    }
+}
+
+let idleTimer;
+
+function resetIdleTimer(){
+
+    clearTimeout(idleTimer);
+
+    idleTimer = setTimeout(() => {
+
+        // hide hand
+        const hand = document.getElementById("patHand");
+        hand.style.opacity = "0";
+
+        // hide bottles
+        const bottleBox = document.getElementById("bottleContainer");
+        bottleBox.classList.remove("show");
+
+    }, 10000); // 10 seconds
+}
+
+setInterval(() => {
+    if(sleep > 0 && sleep < 100){
+        sleep -= 1;
+        document.getElementById("sleepFill").style.width = sleep + "%";
+    }
+}, 4000);
+
+function setBubbleText(el, text){
+    el.innerText = text;
+}
+
+function startLightScene(){
+
+    const bf = document.getElementById("bfAvatar");
+    const nami = document.getElementById("namiAvatar");
+
+    const namiChat = document.getElementById("namiChat");
+    const bfChat = document.getElementById("bfChat");
+
+    const trampoline = document.getElementById("trampoline");
+    const baby = document.getElementById("growndodo");
+
+    const chair = document.getElementById("namiChair");
+    const namiBubble = document.getElementById("namiChairBubble");
+
+    // =========================
+    // RESET EVERYTHING
+    // =========================
+    bf.style.opacity = "0";
+    nami.style.opacity = "0";
+    namiChat.style.opacity = "0";
+    bfChat.style.opacity = "0";
+
+    trampoline.style.opacity = "0";
+    baby.style.opacity = "0";
+    chair.style.opacity = "0";
+    namiBubble.style.opacity = "0";
+
+    bf.classList.remove("fadeOut");
+    nami.classList.remove("fadeOut");
+    namiChat.classList.remove("fadeOut");
+    bfChat.classList.remove("fadeOut");
+
+    // =========================
+    // 1. INTRO AVATARS
+    // =========================
+    setTimeout(() => {
+        bf.style.transition = "opacity 1.8s ease";
+        nami.style.transition = "opacity 1.8s ease";
+
+        bf.style.opacity = "1";
+        nami.style.opacity = "1";
+    }, 2500);
+
+    // 💗 nami chat
+    setTimeout(() => {
+        namiChat.style.transition = "opacity 1.6s ease, transform 1.6s ease";
+        namiChat.style.opacity = "1";
+        namiChat.style.transform = "translateY(0)";
+        namiChat.innerText = "babyyyyy >.<";
+    }, 3400);
+
+    // 💙 bf chat
+    setTimeout(() => {
+        bfChat.style.transition = "opacity 1.6s ease, transform 1.6s ease";
+        bfChat.style.opacity = "1";
+        bfChat.style.transform = "translateY(0)";
+        bfChat.innerText = "its okay baby i'm here";
+    }, 4200);
+
+    // =========================
+    // 2. FADE OUT INTRO
+    // =========================
+    setTimeout(() => {
+
+        bf.classList.add("fadeOut");
+        nami.classList.add("fadeOut");
+        namiChat.classList.add("fadeOut");
+        bfChat.classList.add("fadeOut");
+
+    }, 7500);
+
+    // =========================
+    // 3. SCENE SWITCH (CHAIR + TRAMPOLINE + DODO)
+    // =========================
+setTimeout(() => {
+
+    trampoline.style.transition = "opacity 1.8s ease";
+    baby.style.transition = "opacity 1.8s ease";
+    chair.style.transition = "opacity 1.8s ease";
+
+    trampoline.style.opacity = "1";
+    baby.style.opacity = "1";
+    chair.style.opacity = "1";
+
+    namiBubble.style.transition = "opacity 1.8s ease, transform 1.8s ease";
+    namiBubble.style.opacity = "1";
+    namiBubble.style.transform = "translateY(0)";
+
+    baby.classList.add("jumpLoop");
+
+    // ⭐ FORCE DODO BUBBLE APPEAR BEFORE LOOP
+    const dodoBubble = document.getElementById("lightDodoBubble");
+
+dodoBubble.style.opacity = "1";
+dodoBubble.style.transform = "scale(1)";
+dodoBubble.style.transition = "opacity 1.5s ease, transform 1.5s ease";
+dodoBubble.innerText = " ";
+    dodoBubble.style.zIndex = "99999";
+
+    startDodoTalkLoop();
+
+const guide = document.getElementById("lightBubble");
+
+guide.innerText = "click on light to see more options";
+guide.style.opacity = "1";
+guide.style.transform = "scale(1.05)";
+
+const lightDog = document.getElementById("lightDog");
+lightDog.classList.add("glow");
+
+
+}, 9500);
+
+
+// =========================
+// DODO TALK LOOP
+// =========================
+let dodoIntervalStarted = false;
+
+const dodoLines = [
+    "boing",
+    "daddy look at me",
+    "so fast",
+    "weeee"
+];
+
+function startDodoTalkLoop(){
+
+    if(dodoIntervalStarted) return;
+    dodoIntervalStarted = true;
+
+    const dodoBubble = document.getElementById("lightDodoBubble");
+
+    let i = 0;
+
+    setInterval(() => {
+
+        // reset pop animation
+        dodoBubble.style.transform = "scale(0.9)";
+        dodoBubble.style.opacity = "0.6";
+
+        setTimeout(() => {
+            dodoBubble.innerText = dodoLines[i];
+            dodoBubble.style.transform = "scale(1)";
+            dodoBubble.style.opacity = "1";
+
+            i = (i + 1) % dodoLines.length;
+        }, 120);
+
+    }, 1600);
+}
+}
+
+window.addEventListener("load", () => {
+
+    
+    const light = document.getElementById("lightDog");
+    const menu = document.getElementById("lightMenu");
+
+    if(!light) {
+        console.log("LIGHT NOT FOUND");
+        return;
+    }
+
+    light.addEventListener("click", (e) => {
+        e.stopPropagation();
+        menu.classList.toggle("show");
+
+        // 💡 REMOVE GLOW AFTER FIRST CLICK
+        light.classList.remove("glow");
+    });
+
+});
+
+function lightAction(type){
+
+    const lightBubble = document.getElementById("lightDogBubble");
+
+    lightBubble.style.opacity = "1";
+    lightBubble.style.transform = "scale(1)";
+
+   if(type === "pat"){
+    enableLightPatMode();
+}
+
+    if(type === "fetch"){
+    startFetch();
+}
+
+    if(type === "treat"){
+
+    const light = document.getElementById("lightDog");
+    const bubble = document.getElementById("lightDogBubble");
+    const treat = document.getElementById("dogTreat");
+
+    // 🍪 show treat
+    treat.style.opacity = "1";
+    treat.style.transform = "scale(1)";
+
+    bubble.innerText = "WAIT IS THAT FOR ME??";
+
+    // move treat to dog
+    setTimeout(() => {
+
+        const dogRect = light.getBoundingClientRect();
+        const treatRect = treat.getBoundingClientRect();
+
+        const x = dogRect.left - treatRect.left + 30;
+        const y = dogRect.top - treatRect.top + 70;
+
+        treat.style.transform = `translate(${x}px, ${y}px) scale(0.8)`;
+
+    }, 500);
+
+    // 🐕 happy reaction
+    setTimeout(() => {
+
+        bubble.innerText = "CRUNCH CRUNCH";
+
+        // bounce animation
+        light.style.transition = "transform 0.2s ease";
+        let jumps = 0;
+
+        const jumpLoop = setInterval(() => {
+            light.style.transform = "translateY(-12px)";
+            setTimeout(() => {
+                light.style.transform = "translateY(0)";
+            }, 100);
+
+            jumps++;
+
+            if(jumps >= 4){
+                clearInterval(jumpLoop);
+            }
+
+        }, 200);
+
+    }, 1200);
+
+    // 💖 final cute line
+    setTimeout(() => {
+        bubble.innerText = "I LOVE YOU HUMAN 🐾";
+    }, 2200);
+
+    // 🍪 disappear treat
+    setTimeout(() => {
+        treat.style.opacity = "0";
+    }, 3000);
+}
+
+    if(type === "bark"){
+
+    const light = document.getElementById("lightDog");
+    const bubble = document.getElementById("lightDogBubble");
+
+    let i = 0;
+
+    bubble.style.opacity = "1";
+    bubble.style.transform = "scale(1)";
+
+    const barkLoop = setInterval(() => {
+
+        // ✨ little bounce each bark
+        light.style.transform = "translateY(-8px)";
+        setTimeout(() => {
+            light.style.transform = "translateY(0)";
+        }, 120);
+
+        // 💬 change text
+        bubble.innerText = barkLines[i];
+
+        i++;
+
+        if(i >= barkLines.length){
+            clearInterval(barkLoop);
+
+            // fade out bubble after done
+            setTimeout(() => {
+                bubble.style.opacity = "0";
+            }, 20000);
+        }
+
+    }, 1300); // speed of barking
+}
+
+    // optional fade out after a bit
+    // only fade for NON-bark actions
+if(type !== "bark"){
+    setTimeout(() => {
+        lightBubble.style.opacity = "0";
+    }, 2000);
+}
+
+    document.getElementById("lightMenu").classList.remove("show");
+}
+
+function enableLightPatMode(){
+
+    const light = document.getElementById("lightDog");
+
+    // 👇 REMOVE GLOW BEFORE PAT STARTS
+    light.classList.remove("glow");
+
+    lightPatMode = true;
+    lightPatCount = 0;
+
+    const hand = document.getElementById("lightHand");
+    const bubble = document.getElementById("lightDogBubble");
+
+    hand.style.opacity = "1";
+    hand.style.transform = "scale(1)";
+
+    bubble.innerText = "drag to pat me";
+
+    enableLightDrag(hand);
+}
+
+function enableLightDrag(el){
+
+    let isDragging = false;
+    let offsetX, offsetY;
+
+    el.onmousedown = function(e){
+        isDragging = true;
+
+        offsetX = e.clientX - el.getBoundingClientRect().left;
+        offsetY = e.clientY - el.getBoundingClientRect().top;
+
+        el.style.transition = "none";
+    };
+
+    document.onmousemove = function(e){
+        if(!isDragging) return;
+
+        el.style.left = (e.clientX - offsetX) + "px";
+        el.style.top = (e.clientY - offsetY) + "px";
+
+        el.style.right = "auto";
+        el.style.bottom = "auto";
+    };
+
+    document.onmouseup = function(){
+        if(!isDragging) return;
+
+        isDragging = false;
+        el.style.transition = "0.2s ease";
+
+        checkLightPatDrop();
+    };
+}
+
+function checkLightPatDrop(){
+
+    if(!lightPatMode) return;
+
+    const hand = document.getElementById("lightHand");
+    const light = document.getElementById("lightDog");
+
+    const handRect = hand.getBoundingClientRect();
+    const lightRect = light.getBoundingClientRect();
+
+    const overlap =
+        handRect.left < lightRect.right &&
+        handRect.right > lightRect.left &&
+        handRect.top < lightRect.bottom &&
+        handRect.bottom > lightRect.top;
+
+    if(overlap){
+        patLight();
+    }
+}
+
+function patLight(){
+
+    if(!lightPatMode) return;
+
+    console.log("PAT TRIGGERED");
+
+    lightPatCount++;
+
+    const bubble = document.getElementById("lightDogBubble");
+
+    bubble.style.opacity = "1";
+    bubble.style.transform = "scale(1)";
+
+    const light = document.getElementById("lightDog");
+    light.style.transform = "scale(1.1)";
+
+    setTimeout(() => {
+        light.style.transform = "scale(1)";
+    }, 200);
+
+    if(lightPatCount === 1){
+        bubble.innerText = "i like that";
+    }
+    else if(lightPatCount === 2){
+        bubble.innerText = "woofwoof";
+    }
+    else if(lightPatCount === 3){
+        bubble.innerText = "okay human enough";
+        endLightPatMode();
+    }
+}
+
+function endLightPatMode(){
+
+    lightPatMode = false;
+
+    const hand = document.getElementById("lightHand");
+
+    hand.style.opacity = "0";
+
+    // optional: reset position
+    hand.style.left = "";
+    hand.style.top = "";
+}
+
+function startFetch(){
+
+    const light = document.getElementById("lightDog");
+    const bubble = document.getElementById("lightDogBubble");
+    const toy = document.getElementById("fetchToy");
+
+    // 🧸 show toy
+    toy.style.opacity = "1";
+    toy.style.transform = "scale(1)";
+
+    // 💬 dialogue
+    bubble.style.opacity = "1";
+    bubble.innerText = "woof woof i'll be back";
+
+    light.style.transform = "scale(1.05)";
+
+    setTimeout(() => {
+
+        // 🎭 toy fades first
+        toy.style.opacity = "0";
+
+        // then Light disappears
+        setTimeout(() => {
+            light.style.opacity = "0";
+        }, 300);
+
+    }, 1000);
+
+    // ⏳ RETURN AFTER 5 SECONDS (changed from 3s → 5s)
+    setTimeout(() => {
+
+        light.style.opacity = "1";
+        toy.style.opacity = "1";
+
+        bubble.innerText = "i got it 😼";
+
+        light.style.transform = "scale(1.1)";
+        setTimeout(() => {
+            light.style.transform = "scale(1)";
+        }, 200);
+
+    }, 5000);
+
+    // 🧸 REMOVE TOY AFTER 10 SECONDS (new)
+    setTimeout(() => {
+        toy.style.opacity = "0";
+    }, 10000);
+}
+
+const barkLines = [
+    "woofwoof",
+    "arf",
+    "i'm a good boy",
+    "dodo is being very loud",
+    "woofwoof",
+    "arf",
+    "you're my fav human",
+    "how did your trade go today?",
+    "woofwoof",
+    "arf"
+];
+
+let flashInterval;
+
+function startCameraFlashes(){
+
+    const container = document.getElementById("flashContainer");
+
+    flashInterval = setInterval(() => {
+
+        const flash = document.createElement("div");
+        flash.classList.add("flash");
+
+        // random position
+        flash.style.left = Math.random() * window.innerWidth + "px";
+        flash.style.top = Math.random() * window.innerHeight + "px";
+
+        // random size (variation = realism)
+        const size = 50 + Math.random() * 100;
+        flash.style.width = size + "px";
+        flash.style.height = size + "px";
+
+        container.appendChild(flash);
+
+        // fade in
+        flash.style.transition = "opacity 0.2s ease";
+        flash.style.opacity = "1";
+
+        // fade out slowly
+        setTimeout(() => {
+            flash.style.transition = "opacity 1.2s ease";
+            flash.style.opacity = "0";
+        }, 150);
+
+        // remove after animation
+        setTimeout(() => {
+            flash.remove();
+        }, 1500);
+
+    }, 1200); // 👈 SLOW (you can increase to 1500–2000 for even calmer vibe)
+}
+
+function stopCameraFlashes(){
+    clearInterval(flashInterval);
+
+    const container = document.getElementById("flashContainer");
+    if(container) container.innerHTML = "";
+}
+
+function startRedCarpetScene(){
+
+    startCameraFlashes();
+    startCrowdHype(); // 👈 ADD THIS
+    startGrowndollTalk();
+
+const bf = document
+    .getElementById("redCarpetPage")
+    .querySelector("#bfWalk");
+
+    setTimeout(() => {
+
+        bf.classList.add("walk");
+
+        setTimeout(() => {
+            bf.classList.add("bounce");
+        }, 500);
+
+    }, 3000);
+}
+
+const crowdLines = [
+    "OMG",
+    "YOU'RE SO HANDSOME",
+    "ARE YOU SINGLE",
+    "MARRY ME",
+    "AAAAAA",
+    "WOOOO",
+    "LOOK HERE",
+    "OVER HERE",
+    "KINGGG",
+    "SLAYYY"
+];
+
+let crowdHypeInterval;
+
+function startCrowdHype(){
+
+    const container = document.getElementById("crowdBubbles");
+
+    crowdHypeInterval = setInterval(() => {
+
+        const bubble = document.createElement("div");
+        bubble.className = "crowdBubble";
+
+        // random text
+        bubble.innerText = crowdLines[
+            Math.floor(Math.random() * crowdLines.length)
+        ];
+
+        // random horizontal position
+        bubble.style.left = (5 + Math.random() * 70) + "%";
+
+        // random slight vertical offset
+        bubble.style.bottom = (80 + Math.random() * 60) + "px";
+
+        container.appendChild(bubble);
+
+        // remove after animation
+        setTimeout(() => {
+            bubble.remove();
+        }, 2800);
+
+    }, 500); // spawn speed
+
+}
+
+const growndollLines = [
+    "thats my daddy",
+    "look at him go",
+    "so big and strong"
+];
+
+let growndollIndex = 0;
+
+let growndollInterval;
+
+function startGrowndollTalk(){
+
+    const bubble = document.getElementById("growndollBubble");
+
+    // 🛑 stop previous loop if exists
+    clearInterval(growndollInterval);
+
+    bubble.style.opacity = "1";
+
+    growndollInterval = setInterval(() => {
+
+        bubble.style.transform = "scale(0.9)";
+        bubble.style.opacity = "0.6";
+
+        setTimeout(() => {
+            bubble.innerText = growndollLines[growndollIndex];
+
+            bubble.style.transform = "scale(1)";
+            bubble.style.opacity = "1";
+
+            growndollIndex = (growndollIndex + 1) % growndollLines.length;
+
+        }, 150);
+
+    }, 2000);
+}
+
+// 🎯 toggle menu when bf is clicked
+document.addEventListener("click", function(e){
+
+    const bf = document.querySelector("#redCarpetPage #bfWalk");
+    const menu = document.getElementById("bfMenu");
+
+    if(!bf || !menu) return;
+
+    if(e.target === bf){
+        e.stopPropagation();
+        menu.classList.toggle("show");
+        return;
+    }
+
+    // click anywhere else → close
+    if(!e.target.closest("#bfMenu")){
+        menu.classList.remove("show");
+    }
+});
+
+function bfAction(type){
+
+    const menu = document.getElementById("bfMenu");
+    menu.classList.remove("show");
+
+    console.log("BF action:", type);
+
+    // we’ll fill these later 👇
+    if(type === "guest"){
+      spawnGuest();
+    }
+
+    if(type === "pose"){
+        startPose();
+    }
+
+    if(type === "mic"){
+        startMic();
+    }
+
+    if(type === "look"){
+        startLook();
+    }
+}
+
+function spawnGuest(){
+
+    const limo = document.getElementById("limo");
+    const speed = document.getElementById("speedAvatar");
+
+    // 🚗 Limo fades in
+    limo.style.transition = "opacity 1.5s ease";
+    limo.style.opacity = "1";
+
+    // 🤸 Speed appears AFTER limo
+    setTimeout(() => {
+
+        speed.style.transition = "opacity 1s ease, transform 1s ease";
+        speed.style.opacity = "1";
+
+        // start slightly inside limo area
+        speed.style.transform = "translateX(40px)";
+
+        // step out motion
+        setTimeout(() => {
+            speed.style.transform = "translateX(-60px)";
+        }, 200);
+
+        // start flipping + talking
+        startSpeedChaos();
+
+    }, 1200);
+}
+
+function startSpeedChaos(){
+
+    const speed = document.getElementById("speedAvatar");
+    const bubble = document.getElementById("speedBubble"); // 👈 USE EXISTING
+
+    bubble.style.opacity = "1";
+    bubble.innerText = "bauwauwbuauauwau";
+
+    // start flipping
+    speed.classList.add("speedFlip");
+
+    startSpeedBubbles();
+
+    // stop after 7 sec
+    setTimeout(() => {
+
+        speedActive = false;
+        clearInterval(speedBubbleInterval);
+
+        speed.classList.remove("speedFlip");
+
+        startSpeedExit();
+
+    }, 7000);
+}
+
+let speedBubbleInterval;
+let speedActive = false;
+
+function startSpeedBubbles(){
+    const bubble = document.getElementById("speedBubble");
+
+    const texts = [
+        "bauwauwbuauauwau",
+        "SIUUUUUU",
+        "I HATE RONALDO"
+    ];
+
+    let i = 0;
+    speedActive = true;
+
+    speedBubbleInterval = setInterval(() => {
+        if(!speedActive) return;
+
+        bubble.innerText = texts[i];
+        bubble.style.opacity = "1";
+
+        i = (i + 1) % texts.length;
+    }, 800);
+}
+
+function startSpeedExit(){
+
+    const speed = document.getElementById("speedAvatar");
+    const bubble = document.getElementById("speedBubble");
+    const limo = document.getElementById("limo");
+
+    // 🗣️ first line
+    bubble.innerText = "wssup bro";
+
+    // 🚶 start walking
+    setTimeout(() => {
+        speed.classList.add("walkLeft");
+    }, 500);
+
+    // 🗣️ second line
+    setTimeout(() => {
+        bubble.innerText = "aight i gtg bye";
+    }, 2000);
+
+    // 🌫️ fade out both
+    setTimeout(() => {
+
+        speed.style.transition = "opacity 1.5s ease";
+        limo.style.transition = "opacity 1.5s ease";
+
+        speed.style.opacity = "0";
+        limo.style.opacity = "0";
+
+        bubble.style.opacity = "0";
+
+    }, 3500);
+}
+
+function startPose(){
+
+    const bf = document.getElementById("bfWalk");
+
+    // fade out
+    bf.style.opacity = "0";
+
+    setTimeout(() => {
+
+        // switch to pose
+        bf.src = "bfpose.png";
+
+        // fade in
+        bf.style.opacity = "1";
+
+    }, 300);
+
+    // go back after 5 sec
+    setTimeout(() => {
+
+        bf.style.opacity = "0";
+
+        setTimeout(() => {
+
+            bf.src = "bf-avatar.png";
+            bf.style.opacity = "1";
+
+        }, 300);
+
+    }, 5000);
+}
+
+function startMic(){
+
+    const mic = document.getElementById("bfMic");
+    const bubble = document.getElementById("bfMicBubble");
+
+    // 🎤 show mic
+    mic.classList.add("show");
+
+    setTimeout(() => {
+        bubble.classList.add("show");
+    }, 300);
+
+    // ✨ tiny pop
+    bubble.style.transform = "translateX(-50%) scale(1.05)";
+    setTimeout(() => {
+        bubble.style.transform = "translateX(-50%) scale(1)";
+    }, 200);
+
+    // 🔥 START CROWD CHAOS
+    startCrowdReaction();
+    startCrowdHearts();
+
+    // ⏳ STOP EVERYTHING AFTER 9s
+    setTimeout(() => {
+        stopCrowdReaction();
+        stopCrowdHearts();
+    }, 9000);
+
+    // 🎤 hide mic + bubble after 4s
+    setTimeout(() => {
+        bubble.classList.remove("show");
+        mic.classList.remove("show");
+    }, 4000);
+}
+
+let crowdReactionInterval;
+
+function startCrowdReaction(){
+
+    const container = document.getElementById("crowdBubbles");
+
+    const reactions = [
+        "OMG","AWWWWWW","SO CUTEEEEE",
+        "AAAAAA","I'M CRYING","WHO IS SHE??"
+    ];
+
+    crowdReactionInterval = setInterval(() => {
+
+        const bubble = document.createElement("div");
+        bubble.className = "crowdBubble";
+
+        bubble.innerText = reactions[Math.floor(Math.random() * reactions.length)];
+
+        bubble.style.left = (Math.random() * 100) + "%";
+        bubble.style.bottom = (140 + Math.random() * 60) + "px";
+
+        container.appendChild(bubble);
+
+        setTimeout(() => bubble.remove(), 3000);
+
+    }, 150);
+}
+
+function stopCrowdReaction(){
+    clearInterval(crowdReactionInterval);
+}
+
+let heartInterval;
+
+function startCrowdHearts(){
+
+    const container = document.getElementById("crowdBubbles");
+
+    heartInterval = setInterval(() => {
+
+        const heart = document.createElement("div");
+        heart.className = "crowdHeart";
+        heart.innerText = "💖";
+
+        heart.style.left = (Math.random() * 100) + "%";
+        heart.style.bottom = (120 + Math.random() * 40) + "px";
+
+        container.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 3000);
+
+    }, 200);
+}
+
+function stopCrowdHearts(){
+    clearInterval(heartInterval);
+}
+
+function startLook(){
+
+    const bf = document.getElementById("bfWalk");
+    const dollBubble = document.getElementById("growndollBubble");
+
+    // 🛑 pause her normal talking loop
+    clearInterval(growndollInterval);
+
+    // 👀 bf turns toward doll
+    bf.classList.add("lookLeft");
+
+    // 💬 main moment
+    dollBubble.innerText = "he looked at me!";
+    dollBubble.style.opacity = "1";
+
+    // tiny pop
+    dollBubble.style.transform = "scale(1.08)";
+    setTimeout(() => {
+        dollBubble.style.transform = "scale(1)";
+    }, 200);
+
+    // ⏳ HOLD FOR 14 SECONDS
+    setTimeout(() => {
+
+        // reset bf
+        bf.classList.remove("lookLeft");
+
+        // 🔁 resume her normal loop
+        startGrowndollTalk();
+
+    }, 14000);
+}
+
+const nami = document.getElementById("namiCenterImg");
+const namiMenu = document.getElementById("namiMenu");
+
+nami.addEventListener("click", (e) => {
+    e.stopPropagation();
+    namiMenu.classList.toggle("show");
+
+
+});
+
+// click outside = close
+document.addEventListener("click", (e) => {
+    if(!e.target.closest("#namiMenu") && e.target.id !== "namiCenterImg"){
+        namiMenu.classList.remove("show");
+    }
+});
+
+function startCouchCuddle(){
+
+document.getElementById("namiMenu").classList.remove("show");
+if(namiPatMode) return;
+
+    const normal = document.getElementById("normalCouch");
+    const cuddle = document.getElementById("cuddleCouch");
+    const sleep = document.getElementById("sleepCouch");
+
+    const bubble = document.getElementById("namiCouchBubble");
+
+// hide the center bubble completely
+document.getElementById("namiWaitBubble").style.opacity = "0";
+bubble.style.opacity = "1";
+    const nami = document.getElementById("namiCenterImg");
+
+    // hide standing nami
+    nami.style.opacity = "0";
+
+    // fade couch → cuddle couch
+    cuddle.style.transition = "opacity 1.5s ease";
+    cuddle.style.opacity = "1";
+
+    normal.style.transition = "opacity 1.5s ease";
+    normal.style.opacity = "0";
+
+    // 💬 YAPPING PHASE
+    bubble.innerText = "meri baat suno na";
+
+    setTimeout(() => {
+        bubble.innerText = "mujhe kuch khane h";
+    }, 2500);
+
+    setTimeout(() => {
+        bubble.innerText = "tumhe pta h aaj naa...";
+    }, 6000);
+
+    setTimeout(() => {
+        bubble.innerText = "i'm bored";
+    }, 9500);
+
+    setTimeout(() => {
+        bubble.innerText = "when will your work be done?";
+    }, 12000);
+
+    // 🖐️ HAND APPEARS AFTER 14s
+    setTimeout(() => {
+        enableNamiPatMode();
+    }, 14000);
+}
+
+let namiPatCount = 0;
+let namiPatMode = false;
+
+function enableNamiPatMode(){
+
+    namiPatMode = true;
+    namiPatCount = 0;
+
+    const hand = document.getElementById("namiHand");
+
+    hand.style.opacity = "1";
+    hand.style.transform = "scale(1)";
+
+    document.getElementById("namiCouchBubble").innerText =
+    "headpats chaiye :<";
+
+    enableNamiDrag(hand);
+}
+
+function enableNamiDrag(el){
+
+    let isDragging = false;
+    let offsetX, offsetY;
+
+    el.onmousedown = function(e){
+        isDragging = true;
+        offsetX = e.clientX - el.getBoundingClientRect().left;
+        offsetY = e.clientY - el.getBoundingClientRect().top;
+        el.style.transition = "none";
+    };
+
+    document.onmousemove = function(e){
+        if(!isDragging) return;
+
+        el.style.left = (e.clientX - offsetX) + "px";
+        el.style.top = (e.clientY - offsetY) + "px";
+    };
+
+    document.onmouseup = function(){
+        isDragging = false;
+        checkNamiPat();
+    };
+}
+
+function checkNamiPat(){
+
+    if(!namiPatMode) return;
+
+    const hand = document.getElementById("namiHand");
+    const couch = document.getElementById("cuddleCouch");
+
+    const h = hand.getBoundingClientRect();
+    const c = couch.getBoundingClientRect();
+
+    const overlap =
+        h.left < c.right &&
+        h.right > c.left &&
+        h.top < c.bottom &&
+        h.bottom > c.top;
+
+    if(overlap){
+        namiPat();
+    }
+}
+
+function namiPat(){
+
+    namiPatCount++;
+
+    const bubble = document.getElementById("namiCouchBubble");
+
+    bubble.style.transform = "translateX(-50%) scale(1.05)";
+setTimeout(()=>{
+    bubble.style.transform = "translateX(-50%) scale(0.9)";
+}, 200);
+
+    if(namiPatCount === 1){
+        bubble.innerText = "i love you sm";
+    }
+    else if(namiPatCount === 2){
+        bubble.innerText = ":3";
+    }
+    else if(namiPatCount === 3){
+        bubble.innerText = "mwahhhhhh";
+    }
+    else if(namiPatCount === 4){
+        triggerBlanketPhase();
+    }
+}
+
+function triggerBlanketPhase(){
+
+    namiPatMode = false;
+
+    const hand = document.getElementById("namiHand");
+    hand.style.opacity = "0";
+
+    const blanket = document.getElementById("namiBlanket");
+
+    blanket.style.opacity = "1";
+    blanket.style.transform = "scale(1)";
+
+    document.getElementById("namiCouchBubble").innerText =
+    "thndi lgri h :<";
+
+    enableNamiBlanketDrag();
+
+}
+
+function enableNamiBlanketDrag(){
+
+    const blanket = document.getElementById("namiBlanket");
+
+    let isDragging = false;
+    let offsetX, offsetY;
+
+    blanket.onmousedown = function(e){
+        isDragging = true;
+
+        offsetX = e.clientX - blanket.getBoundingClientRect().left;
+        offsetY = e.clientY - blanket.getBoundingClientRect().top;
+
+        blanket.style.transition = "none";
+    };
+
+    document.onmousemove = function(e){
+        if(!isDragging) return;
+
+        blanket.style.left = (e.clientX - offsetX) + "px";
+        blanket.style.top = (e.clientY - offsetY) + "px";
+    };
+
+    document.onmouseup = function(){
+        if(!isDragging) return;
+        isDragging = false;
+
+        checkBlanketPlaced();
+    };
+}
+
+function checkBlanketPlaced(){
+
+    const blanket = document.getElementById("namiBlanket");
+    const couch = document.getElementById("cuddleCouch");
+
+    const b = blanket.getBoundingClientRect();
+    const c = couch.getBoundingClientRect();
+
+    const overlap =
+        b.left < c.right &&
+        b.right > c.left &&
+        b.top < c.bottom &&
+        b.bottom > c.top;
+
+    if(overlap){
+
+        document.getElementById("namiWaitBubble").innerText =
+        "cozy...";
+
+        setTimeout(() => {
+            startNamiSleep();
+        }, 1500);
+    }
+}
+
+let namiSleepTimeout1;
+let namiSleepTimeout2;
+
+function startNamiSleep(){
+
+    const cuddle = document.getElementById("cuddleCouch");
+    const sleep = document.getElementById("sleepCouch");
+    const normal = document.getElementById("normalCouch");
+    const bubble = document.getElementById("namiCouchBubble");
+    const nami = document.getElementById("namiCenterImg");
+    const blanket = document.getElementById("namiBlanket");
+
+    // 🚨 CLEAR OLD TIMERS (VERY IMPORTANT)
+    clearTimeout(namiSleepTimeout1);
+    clearTimeout(namiSleepTimeout2);
+
+    // 💤 start
+    bubble.innerText = "zzzzz";
+
+    // ⏳ after 8s → show sleep couch
+    namiSleepTimeout1 = setTimeout(() => {
+
+        cuddle.style.opacity = "0";
+        sleep.style.transition = "opacity 1.5s ease";
+        sleep.style.opacity = "1";
+
+    }, 3000);
+
+    // 🌅 FINAL RESET
+    namiSleepTimeout2 = setTimeout(() => {
+
+        sleep.style.opacity = "0";
+        normal.style.opacity = "1";
+
+        nami.style.opacity = "1";
+
+        // ✨ NOW blanket disappears (your requirement)
+        blanket.style.transition = "all 0.6s ease";
+        blanket.style.opacity = "0";
+        blanket.style.transform = "scale(0.8)";
+
+         document.getElementById("namiCouchBubble").style.opacity = "0";
+document.getElementById("namiCouchBubble").innerText = "";
+
+    }, 14000);
+}
+
+
+function startMassageCuddle(){
+
+    document.getElementById("namiMenu").classList.remove("show");
+    resetMassageScene(); // 🔥 kill any old interaction first
+    const base = document.getElementById("massageChairBase");
+    const sit = document.getElementById("sitChair");
+    const sad = document.getElementById("sadChair");
+    const bubble = document.getElementById("namiMassageBubble");
+    const nami = document.getElementById("namiCenterImg");
+
+    // hide standing nami
+    nami.style.opacity = "0";
+
+    // show sit chair
+    sit.style.opacity = "1";
+    base.style.opacity = "0";
+
+    // 💬 start bubble
+    bubble.style.opacity = "1";
+
+    // 💬 initial yapping
+    setMassageTimeout(() => {
+        bubble.innerText = "ye bhi dodo ko btaungi";
+    }, 500);
+
+    setMassageTimeout(() => {
+        bubble.innerText = "or fir pta h kya hua...";
+    }, 3000);
+
+    setMassageTimeout(() => {
+        bubble.innerText = "haina";
+    }, 5500);
+
+    setMassageTimeout(() => {
+        bubble.innerText = "real";
+    }, 7500);
+
+    // 😖 pain moment
+    setMassageTimeout(() => {
+        sit.style.opacity = "0";
+        sad.style.opacity = "1";
+
+        bubble.innerText = "petu dukhra h :<";
+    }, 9500);
+
+    // 🫚 ginger
+    setMassageTimeout(() => {
+        spawnGinger();
+    }, 11500);
+}
+
+function spawnGinger(){
+
+    const ginger = document.getElementById("namiGinger");
+    ginger.style.opacity = "1";
+    ginger.style.transform = "translateX(-50%) scale(1)";
+    enableGingerDrag(ginger); // 💥 THIS WAS MISSING
+
+}
+
+let gingerUsed = false;
+
+function enableGingerDrag(el){
+
+    let isDragging = false;
+    let offsetX, offsetY;
+
+    el.onmousedown = function(e){
+        isDragging = true;
+
+        offsetX = e.clientX - el.getBoundingClientRect().left;
+        offsetY = e.clientY - el.getBoundingClientRect().top;
+
+        el.style.transition = "none";
+        el.style.cursor = "grabbing";
+    };
+
+    document.addEventListener("mousemove", move);
+    document.addEventListener("mouseup", up);
+
+    function move(e){
+        if(!isDragging) return;
+
+        el.style.left = (e.clientX - offsetX) + "px";
+        el.style.top = (e.clientY - offsetY) + "px";
+    }
+
+    function up(){
+        if(!isDragging) return;
+
+        isDragging = false;
+        el.style.cursor = "grab";
+
+        checkGingerDrop();
+    }
+}
+
+function checkGingerDrop(){
+
+    if(gingerUsed) return;
+
+    const ginger = document.getElementById("namiGinger");
+    const chair = document.getElementById("sadChair");
+
+    const g = ginger.getBoundingClientRect();
+    const c = chair.getBoundingClientRect();
+
+    const overlap =
+        g.left < c.right &&
+        g.right > c.left &&
+        g.top < c.bottom &&
+        g.bottom > c.top;
+
+    if(overlap){
+        gingerUsed = true;
+        finishMassage();
+    }
+}
+
+function finishMassage(){
+
+    const ginger = document.getElementById("namiGinger");
+    const sit = document.getElementById("sitChair");
+    const sad = document.getElementById("sadChair");
+    const base = document.getElementById("massageChairBase");
+    const bubble = document.getElementById("namiMassageBubble");
+    const nami = document.getElementById("namiCenterImg");
+
+    // remove ginger
+    ginger.style.opacity = "0";
+
+    // back to sit
+    sad.style.opacity = "0";
+    sit.style.opacity = "1";
+
+    bubble.innerText = "thanks bby i feel better abb :3";
+
+    // ⏳ HOLD FOR 8 SECONDS (your requirement)
+    setMassageTimeout(()=>{
+
+        sit.style.opacity = "0";
+        base.style.opacity = "1";
+
+        nami.style.opacity = "1";
+
+        bubble.style.opacity = "0";
+        bubble.innerText = "";
+
+        gingerUsed = false;
+
+        resetMassageScene(); // 🔥 NOW reset happens at correct time
+
+    }, 8000);
+}
+
+let massageTimers = [];
+
+function setMassageTimeout(fn, time){
+    const t = setTimeout(fn, time);
+    massageTimers.push(t);
+}
+
+function resetMassageScene(){
+
+    // 🧹 clear all timers
+    massageTimers.forEach(t => clearTimeout(t));
+    massageTimers = [];
+
+    // 🪑 hide all chair states
+    document.getElementById("sitChair").style.opacity = "0";
+    document.getElementById("sadChair").style.opacity = "0";
+    document.getElementById("massageChairBase").style.opacity = "1";
+
+    // 👩 reset nami
+    document.getElementById("namiCenterImg").style.opacity = "1";
+
+    // 💬 hide bubble
+    const bubble = document.getElementById("namiMassageBubble");
+    bubble.style.opacity = "0";
+    bubble.innerText = "";
+
+    // 🫚 hide ginger
+    const ginger = document.getElementById("namiGinger");
+    if(ginger){
+        ginger.style.opacity = "0";
+    }
+}
+
+function startHug(){
+
+    document.getElementById("namiMenu").classList.remove("show");
+
+    const nami = document.getElementById("namiCenterImg");
+    const hug = document.getElementById("namiHug");
+    const bubble = document.getElementById("namiHugBubble");
+
+    // hide normal nami
+    nami.style.opacity = "0";
+
+    // show hug
+    hug.style.opacity = "1";
+
+    // 💗 start hearts
+    startNamiHearts();
+
+    // 💬 bubble appears
+    bubble.style.opacity = "1";
+
+    setTimeout(()=>{
+        bubble.innerText = "i'm so so so so proud of you baby :>";
+    }, 500);
+
+    setTimeout(()=>{
+        bubble.innerText = "if you ever feel tired from work :<";
+    }, 3500);
+
+    setTimeout(()=>{
+        bubble.innerText = "or if you ever lose a trade (hopefully not) :<";
+    }, 7000);
+
+    setTimeout(()=>{
+        bubble.innerText = "you can always come here to hug me :3";
+    }, 10500);
+
+    setTimeout(()=>{
+        bubble.innerText = "i love you bot sara :3";
+    }, 14000);
+
+    // 🌸 fade out everything
+setTimeout(()=>{
+
+    hug.style.opacity = "0";
+
+    // 💥 ADD THIS
+    hug.style.pointerEvents = "none";
+
+    bubble.style.opacity = "0";
+    stopNamiHearts();
+
+    nami.style.opacity = "1";
+
+}, 18000);
+}
+
+let namiHeartInterval;
+
+function startNamiHearts(){
+
+    const container = document.getElementById("hugHearts");
+
+    namiHeartInterval = setInterval(()=>{
+        const heart = document.createElement("div");
+
+        heart.className = "heart";
+        heart.innerText = "♡";
+
+        heart.style.left = Math.random() * 120 - 60 + "px";
+
+        container.appendChild(heart);
+
+        setTimeout(()=> heart.remove(), 3000);
+
+    }, 400);
+}
+
+function stopNamiHearts(){
+    clearInterval(namiHeartInterval);
+}
+
+let carryRunning = false;
+let carryTimers = [];
+
+function setCarryTimeout(fn, time){
+    const t = setTimeout(fn, time);
+    carryTimers.push(t);
+}
+
+function startCarry(){
+
+    if(carryRunning) return; // prevent double start
+    carryRunning = true;
+
+    // close menu
+    document.getElementById("namiMenu").classList.remove("show");
+
+    // reset just in case
+    resetCarry();
+
+    const nami = document.getElementById("namiCenterImg");
+    const right = document.getElementById("carryRight");
+    const left = document.getElementById("carryLeft");
+
+    // hide standing nami
+    nami.style.opacity = "0";
+
+    let steps = 0;
+    let useRight = true;
+
+    function walkLoop(){
+
+        if(steps >= 8){
+            endCarry();
+            return;
+        }
+
+        if(useRight){
+
+            // RIGHT PNG moves LEFT
+            right.style.transition = "none";
+            right.style.transform = "translateX(120px)";
+            right.style.opacity = "1";
+            left.style.opacity = "0";
+
+            right.offsetHeight;
+
+            right.style.transition = "transform 3.5s linear, opacity 1s";
+            right.style.transform = "translateX(-80px)";
+
+        } else {
+
+            // LEFT PNG moves RIGHT
+            left.style.transition = "none";
+            left.style.transform = "translateX(-120px)";
+            left.style.opacity = "1";
+            right.style.opacity = "0";
+
+            left.offsetHeight;
+
+            left.style.transition = "transform 3.5s linear, opacity 1s";
+            left.style.transform = "translateX(120px)";
+        }
+
+        useRight = !useRight;
+        steps++;
+
+        setCarryTimeout(walkLoop, 3500);
+    }
+
+    walkLoop();
+}
+
+function endCarry(){
+
+    const right = document.getElementById("carryRight");
+    const left = document.getElementById("carryLeft");
+    const nami = document.getElementById("namiCenterImg");
+
+   right.style.opacity = "0";
+left.style.opacity = "0";
+
+right.style.pointerEvents = "none";
+left.style.pointerEvents = "none";
+
+right.style.zIndex = "0";
+left.style.zIndex = "0";
+
+    // reset positions
+    right.style.transform = "translateX(-50%)";
+    left.style.transform = "translateX(-50%)";
+
+setCarryTimeout(() => {
+
+    right.style.transform = "translateX(0)";
+    left.style.transform = "translateX(0)";
+
+    // 💥 FORCE SHOW
+    const nami = document.getElementById("namiCenterImg");
+    nami.style.display = "block";   // IMPORTANT
+    nami.style.opacity = "1";
+    nami.style.zIndex = "50";
+
+    carryRunning = false;
+
+}, 800);
+}
+
+function resetCarry(){
+
+    const nami = document.getElementById("namiCenterImg");
+    const right = document.getElementById("carryRight");
+    const left = document.getElementById("carryLeft");
+
+    // clear timers
+    carryTimers.forEach(t => clearTimeout(t));
+    carryTimers = [];
+
+    // reset states
+    right.style.opacity = "0";
+    left.style.opacity = "0";
+
+    right.style.transform = "translateX(0)";
+    left.style.transform = "translateX(0)";
+
+    // ALWAYS bring nami back here
+    nami.style.opacity = "1";
+
+    carryRunning = false;
+}
+
+// 🧸 CARDS (KEEP YOUR ORDER)
+const flashcards = [
+
+  // 💖 PINK
+  "if you feel happy",
+  "if you won a trade",
+  "if you're proud of yourself but wont say it",
+  "if you need a hug",
+  "if you want to get hyped up",
+  "if you forgot how much i love you",
+  "if you opened this by accident",
+
+  // 💜 PURPLE
+  "if you miss me a lot",
+  "if you feel bored",
+  "if you want reassurance but won't say it",
+  "if you dont know what to open",
+  "if you're unmotivated",
+  "if you're locked in",
+  "if i am out somewhere",
+  "if i am sleeping",
+  "if you forgot to drink water",
+
+  // 💙 BLUE
+  "if you're mad at me",
+  "if i don't feel good",
+  "if you don't feel good",
+  "if you think i'm being selfish",
+  "if we just argued",
+  "if you're stressed",
+  "if you feel like giving up",
+  "if you lost a trade",
+  "if you can't sleep"
+];
+
+
+// 💌 FULL PARAS (UNCHANGED STYLE)
+const messages = {
+
+"if you feel happy":
+`awwww mera baby :3 i feel happy for you if you feel happy :3  
+i love you a lot and i hope and wish and manifest that you 
+always stay happy :3 kissi lo mwahhhhhhhhhhhhhhhhhh i like
+ seeing you happy ngl and i want to make you happy or keep you
+ happy hamesha mwahmwah bot saari kissi crdungi`,
+
+"if you won a trade":
+`YAYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY i am so so so so so so so so so so vv proud of you  
+but that was expected icl after all my boyfriend's a W :3  
+you're very smart and intelligent  
+i hope that you um win or whatever the word is
+ i'm not sure but yeah i hope that its always
+ in your favor like today ૮ ˶ᵔ ᵕ ᵔ˶ ა`,
+
+"if you're proud of yourself but wont say it":
+`tbh i'm not sure how many times now i've said that i'm proud of you 
+or how many times i've made dodo and doll said they're proud of you
+ but i'll say it again- i'm proud of you baby (˶ᵔ ᵕ ᵔ˶)  because honestly? 
+you deserve all of them and more and i'm not only proud of you because 
+of why you're proud of yourself but also beacause you yourself are 
+proud of yourself too :3`,
+
+"if you need a hug":
+`you're on the wrong page love  
+go to nami page to hug :3`,
+
+"if you want to get hyped up":
+`hii my handsome charming incredibly smart tall kind helpful
+ caring loving adorable cute pancakes sugarplum honeybun 
+pumpy umpy umpkin doritos cheeseballs cheese popcorn cheese ramen
+ mcdonalds veg happy meal dominos veggie paradise 
+psl looksmaxxer3142091048352 strawberry cake blueberry smoothie
+ boba drink baby ฅ^>⩊<^ ฅ`,
+
+"if you forgot how much i love you":
+`▶︎ •၊၊||၊|။|||| | I LOVE YOU AAAAAAAAAAA LOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT VERY VERY MUCHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH`,
+
+"if you opened this by accident":
+`welp abb cya cre um no worries  ദ്ദി(˵ •̀ ᴗ - ˵ ) ✧
+  wssup baby caseo cya crre ho accha anyways
+ i love you so much and i keep thinking about you 24/7 
+you're just there isme meri cya glti don't you get tired from
+ running in my mind all day? tum to acche khase debloat hogye ho 
+baby run cr crke`,
+
+// 💜
+
+"if you miss me a lot":
+`i bet i miss you way more :< its okay i'll be online kuch der m 
+or maybe if you were working and if you wanted a break and if you
+ came here and ALSO IF you can't talk to me rn its okay :> its not :<
+ jldi jldi se do your pura work and text me jldi se okay na
+ gussigussi hojaungi and if i'm busy agar mai nai aayi to 
+mujhpe gussigussi hojana 
+mat hona na mai choti hu abhi :<`,
+
+"if you feel bored":
+`MUJHE MESEZ CARO yaha cya crre ho bored oh accha cya tum bolre ho ki
+ abb mai boring hogyi hu? boring baate crti hu? yahi mtlb haina tumhara? 
+smjh gyi bs jk mujhe mesez cro jldi se mai boring nai hu`,
+
+"if you want reassurance but won't say it":
+`you're the best boyfrien ever :3 i love being your girlfrien 
+and i love you just as you are and i'd still love you if you
+ became a cockroach or a lizard so yeah itna i love you from top 
+to bottom from consiousness to unconsciousness i trust you 
+blindly too :3 and we'll grow a lot tgt theres more to learn 
+about you abhi but i just love you :O i wont replace you for 
+anything not even for unlimited cup noodles and doritos :>`,
+
+"if you dont know what to open":
+`hmmmmm mujhe bhi nai pta what you should open ig i tried to
+ cover as many moods and situations as i could possibly think of :O
+ but if that isnt still enough then mujhe mesez crke btao na mai 
+cisliye hu haan? HAAN? itti bdi hogyi hu itti bdi si big girl business gf h 
+tumhare pass big brain high iq bhi but khair now that you're here 8=✊=D💦 hj`,
+
+"if you're unmotivated":
+`think or imagine penthouse dubai dodo doll asleep at 2 am we jacuzzi xxx 
+baki tum khud imagine crlo baby but like not just xxx because obvi for me 
+money doesnt matter to me more than you but i also know that you want to be
+ successful in life (and have a cute destination wedding with 50k pink peonies 
+and a farmhouse and a penthouse and maybe a villa and travelling foreign every year
+ at least twice) so um yeah ⸜(｡˃ ᵕ ˂ )⸝♡⸜(｡˃ ᵕ ˂ )⸝♡ lovelovelovelove
+ YOU CAN DO IT i believe you can :3`,
+
+"if you're locked in":
+`YAYYYYYYYYYYYYYYYYY baby you can do it 
+and you ARE doing it and for the 100th time
+ i am SOOOOO proud of you but also jldi se lock out crke mujhe messez crna 
+no rush :3 crte rho apna wrk or whatever mwahhhhhhhhhhhhhhhhh kissi lo`,
+
+"if i am out somewhere":
+`i'm most def like absolutely thinking 
+it'd be wayyyyyyyy better if bhavishya was here with me :<
+ i'm obvi not looking at any guys and also I'M ALSO THINKING bhavishya would like this 
+bhavishya would look cute in this fit and yk what not hopefully i'll be back soon and text you :3`,
+
+"if i am sleeping":
+`please mere spne m aake ajeeb hrkt mat crna firse 
+you can come and cuddle me hug me kissi me godi me LITERALLY ANYTHING 
+wo bhi :3 except mujhe daantna cyuki tum mujhe daant te rehte ho 
+but i still love you so no worries at least aate to ho :3`,
+
+"if you forgot to drink water":
+`DRINK WATER 😡☝🏻 abhi ke abhi or else no kissi 
+hydrate your deep big boy ahh vocal cords 
+i love your voice btw keep sending me vns pyaare pyaare ૮ ྀིᴗ͈ . ᴗ͈ ྀིა`,
+
+// 💙
+
+"if you're mad at me":
+`dont be mad at me aise roungi :< mujhpe mat gussigussi cro na 
+mai abhi chotu baby hu mai choi huna tumse i'm sorry if i did something to hurt you :< 
+i love you bot saara mwahhhhhhhhhhhhhhhh mai betu huna good betu tumhari aise gussigussi nai crte
+ betu pe chlo mujhe kissi do abb godi m leke `,
+
+"if i don't feel good":
+`i'll be okay thodi der m it happens after all 
+relationships are not always smooth like a slide :< 
+sometimes they're like see-saw :< idk it ts makes sense
+ but just know that even if i dont feel good
+ i still love you utna hiiiiiiii and mujhe jldi se ek um
+ pyaara sa vn bhi bhejdena kissi wala or baby bhi crdena (╥‸╥)`,
+
+"if you don't feel good":
+`cya hua hai mere babyy co piti piti crungi coi mere baby co preshan nai crega
+ mere alawa obvi and agr mai hi reason hu to :<
+ i love you sm mai wo bs glti se hogya :< 
+abse nai hoga naa tum smjhre hona mai cya bolri hu
+ chlo mai tumhe khi se ghumake laati hu fir tumhe accha lgega ig :3`,
+
+"if you think i'm being selfish":
+`obviously i'm not selfish if mai hoti to tum mujhe good betu thodi bulate 
+no but genuinely i care for you a lot and if i dont show it enough :< 
+cya cru bs i'll try to but i dooooooo care for you and i think about you a lot
+ and you're my priority and my only chick mwahhhhhhhhhhh`,
+
+"if we just argued":
+`iska mtlb to argument khtm hogayi haina chlo abb idhr aao tum 
+mera baby tumhare gaal khalu cya haan? arguments to hote rehte haina baby
+ har relationships m chahe wo baap bete ka ho or bhn bhai ka ho or saas bahu ka ho
+ or bua mosi ka ho but what matters is that ik and yk that we'll stick tgt and we'll
+ get pass this so no worries we're just better now than before yayyyyyyyyy`,
+
+"if you're stressed":
+`even if i don't know why you're stressed probably because of your wrk
+ but i'm always always always here for you and i'll always try to make you 
+feel better pfft thats just bare minimum tho but i'm proud of you and 
+you're doing a goob job and you'll get pass this because you're big and strong- 
+doll said this too iyr ໒꒰ྀིᵔ ᵕ ᵔ ꒱ྀི১`,
+
+"if you feel like giving up":
+`i'm not sure giving up on what so i'll just assume if its wrk related then- 
+DONT i know you can and you will do this just take small breaks in between 
+don't overwork yourself :3 drink coconut water or order something nice for yourself 
+i couldve done that if i was able to tbh because you deserve it :3 and if its relationship related-
+ which its not i know that fs but also dont because it took a lot to build this site and
+ i dont want my efforts or even yours to go to waste also because i love you :3`,
+
+"if you lost a trade":
+`or if some bad ahh people stole your money again bad baat baby daanto do unco 
+aisa nai crte mere baby ke saath but i also know that you'll make 4920x more money 
+than that maybe today maybe tmrw maybe next month but i knowwwwww I JUST KNOW you will and 
+when you do that you can always come here and open the "if you won a trade" flashcard :3`,
+
+"if you can't sleep":
+`AND IF I AM ASLEEP and you're alone :< yk you can listen to nursery rhymes on youtube any 1
+ on loop and then you'll fall asleep instantly or listen to some bedtime stories those work too
+ for some reason it may sound childish or weird but they actually workkkk sacchi mucchi or
+ maybe you can imagine us cuddling :3 cuddlebunnycuddlebunny ฅ^>⩊<^ฅ`
+};
+
+
+// ✨ POPUP
+const popup = document.getElementById("cardPopup");
+const popupText = document.getElementById("popupText");
+
+function openCard(title, color){
+  popup.classList.add("show");
+  popupText.innerText = messages[title] || "";
+
+  // 🎨 match popup color
+  document.getElementById("popupContent").style.background =
+    color || "#fff8f6";
+}
+
+// 🎨 RENDER CARDS
+const container = document.getElementById("cardsContainer");
+
+flashcards.forEach(text => {
+  const card = document.createElement("div");
+  card.className = "flashcard";
+  card.innerText = text;
+
+  // 💖 categories
+  const softPink = [
+  "if you feel happy",
+  "if you won a trade",
+  "if you're proud of yourself but wont say it",
+  "if you need a hug",
+  "if you want to get hyped up",
+  "if you forgot how much i love you",
+  "if you opened this by accident"
+];
+
+  const softPurple = [
+  "if you miss me a lot",
+  "if you feel bored",
+  "if you want reassurance but won't say it",
+  "if you dont know what to open",
+  "if you're unmotivated",
+  "if you're locked in",
+  "if i am out somewhere",
+  "if i am sleeping",
+  "if you forgot to drink water"
+];
+
+  const softBlue = [
+    "if you're mad at me",
+    "if i don't feel good",
+    "if you don't feel good",
+    "if you think i'm being selfish",
+    "if we just argued",
+    "if you're stressed",
+    "if you feel like giving up",
+    "if you lost a trade",
+    "if you can't sleep"
+  ];
+
+if(softPink.includes(text)){
+  card.style.background = "#ffd1dc";
+}
+else if(softPurple.includes(text)){
+  card.style.background = "#e0ccff";
+}
+else if(softBlue.includes(text)){
+  card.style.background = "#cfe3ff";
+}
+
+  card.onclick = () => openCard(text, card.style.background);
+
+  container.appendChild(card);
+});
+
+
+document.getElementById("closePopup").onclick = () => {
+  popup.classList.remove("show");
+  popupText.innerText = "";
+
+  // reset to default
+  document.getElementById("popupContent").style.background = "#fff8f6";
+};
+
+// ✍️ TYPING EFFECT
+function typeText(text){
+  popupText.innerText = "";
+  let i = 0;
+
+  const interval = setInterval(() => {
+    popupText.innerText += text[i];
+    i++;
+    if(i >= text.length) clearInterval(interval);
+  }, 30); // slow typing
+}
+  
+function startSpoilBubbles(){
+
+    const container = document.getElementById("spoilBubbleContainer");
+
+    setInterval(() => {
+
+        const b = document.createElement("div");
+        b.classList.add("spoilbubble");
+
+        const size = 8 + Math.random() * 35;
+
+        b.style.width = size + "px";
+        b.style.height = size + "px";
+
+        b.style.left = Math.random() * window.innerWidth + "px";
+        b.style.bottom = "-50px";
+
+        b.style.animationDuration = (5 + Math.random() * 6) + "s";
+
+        container.appendChild(b);
+
+        setTimeout(() => b.remove(), 12000);
+
+    }, 1800);
+}
+
+startSpoilBubbles();
+
+let washBurstInterval;
+
+function startWashMachineBubbles(){
+
+    const container = document.getElementById("spoilBubbleContainer");
+    const machine = document.getElementById("spoilWashingMachine");
+
+    const rect = machine.getBoundingClientRect();
+
+    washBurstInterval = setInterval(() => {
+
+        // 🔥 burst amount (3–6 bubbles at once)
+        const count = 1 + Math.floor(Math.random() * 2);
+
+        for(let i = 0; i < count; i++){
+
+            const b = document.createElement("div");
+            b.classList.add("spoilbubble");
+
+            const size = 10 + Math.random() * 25;
+
+            b.style.width = size + "px";
+            b.style.height = size + "px";
+
+            // 🧺 spawn from top of washing machine
+            b.style.left = (rect.left + rect.width / 2 + (Math.random() * 40 - 20)) + "px";
+            b.style.top = (rect.top + 20) + "px";
+
+            // 🌊 upward float but slightly chaotic
+            b.style.animationDuration = (3 + Math.random() * 3) + "s";
+
+            container.appendChild(b);
+
+            setTimeout(() => b.remove(), 8000);
+        }
+
+    }, 600); // burst every 0.6s
+}
+
+function stopWashMachineBubbles(){
+    clearInterval(washBurstInterval);
+}
+
+const vending = document.getElementById("spoilVending");
+const vendingMenu = document.getElementById("spoilVendingMenu");
+
+// 🧃 open/close menu
+vending.addEventListener("click", (e) => {
+  e.stopPropagation();
+  vendingMenu.classList.toggle("show");
+});
+
+// click outside closes menu
+document.addEventListener("click", (e) => {
+  if (!e.target.closest("#spoilVendingMenu") && e.target !== vending) {
+    vendingMenu.classList.remove("show");
+  }
+});
+
+function vendingPick(item){
+
+  const menu = document.getElementById("spoilVendingMenu");
+  menu.classList.remove("show");
+
+  if(item === "doritos"){
+
+    const doritos = document.getElementById("doritosItem");
+    const bubble = document.getElementById("spoilChatBubble");
+
+    doritos.style.opacity = "1";
+    doritos.style.transform = "scale(1)";
+
+    bubble.innerText = "drag it :3";
+    bubble.style.opacity = "1";   // ⭐ IMPORTANT FIX
+
+    enableDoritosDrag();
+  }
+
+if(item === "icecream"){
+
+  const menu = document.getElementById("spoilVendingMenu");
+  menu.classList.remove("show");
+
+  const icecream = document.getElementById("icecreamItem");
+  const bubble = document.getElementById("spoilChatBubble");
+
+  // 🍦 spawn ice cream
+  icecream.style.opacity = "1";
+  icecream.style.transform = "scale(1)";
+
+  bubble.innerText = "drag it :3";
+  bubble.style.opacity = "1";
+
+  enableIcecreamDrag();
+}
+if(item === "banana"){
+
+  const menu = document.getElementById("spoilVendingMenu");
+  menu.classList.remove("show");
+
+  const banana = document.getElementById("bananaItem");
+  const bubble = document.querySelector(".pageBubble");
+
+  banana.style.opacity = "1";
+  banana.style.transform = "scale(1)";
+
+  bubble.innerText = "drag it :3";
+
+  enableBananaDrag();
+}
+if(item === "flowers"){
+
+  const flowers = document.getElementById("flowersItem");
+
+  flowers.style.opacity = "1";
+  flowers.style.transform = "scale(1)";
+
+  spoilSay("drag it :3");
+
+  enableFlowersDrag();
+}
+if(item === "water"){
+
+  const water = document.getElementById("waterItem");
+
+  water.style.opacity = "1";
+  water.style.transform = "scale(1)";
+
+  spoilSay("drag it :3");
+
+  enableWaterDrag();
+}
+if(item === "cupnoodles"){
+
+  const noodles = document.getElementById("cupnoodlesItem");
+
+  noodles.style.opacity = "1";
+  noodles.style.transform = "scale(1)";
+
+  spoilSay("drag it :3");
+
+  enableCupNoodlesDrag();
+}
+}
+
+
+
+function enableDoritosDrag(){
+
+  const doritos = document.getElementById("doritosItem");
+  const nami = document.getElementById("spoilNami");
+
+  let isDragging = false;
+  let offsetX, offsetY;
+
+  doritos.onmousedown = function(e){
+    isDragging = true;
+
+    offsetX = e.clientX - doritos.getBoundingClientRect().left;
+    offsetY = e.clientY - doritos.getBoundingClientRect().top;
+
+    doritos.style.transition = "none";
+  };
+
+  document.onmousemove = function(e){
+    if(!isDragging) return;
+
+    doritos.style.left = (e.clientX - offsetX) + "px";
+    doritos.style.top = (e.clientY - offsetY) + "px";
+  };
+
+  document.onmouseup = function(){
+    if(!isDragging) return;
+
+    isDragging = false;
+    checkDoritosDrop();
+  };
+}
+
+function checkDoritosDrop(){
+
+  const doritos = document.getElementById("doritosItem");
+  const nami = document.getElementById("spoilNami");
+
+  const d = doritos.getBoundingClientRect();
+  const n = nami.getBoundingClientRect();
+
+  const overlap =
+    d.left < n.right &&
+    d.right > n.left &&
+    d.top < n.bottom &&
+    d.bottom > n.top;
+
+  if(overlap){
+    triggerDoritosSuccess();
+  }
+}
+
+function triggerDoritosSuccess(){
+
+  const doritos = document.getElementById("doritosItem");
+  const nami = document.getElementById("spoilNami");
+  const bubble = document.getElementById("spoilChatBubble");
+  const happy = document.getElementById("spoilNamiHappy");
+
+  nami.style.opacity = "0";
+  happy.style.opacity = "1";
+
+  bubble.innerText = "thanks baby :3";
+
+  doritos.style.opacity = "0";
+  doritos.style.transform = "scale(0.8)";
+
+spoilSay("thanks baby :3");
+  setTimeout(() => {
+
+    happy.style.opacity = "0";
+    nami.style.opacity = "1";
+
+    doritos.remove();
+
+  }, 2500);
+}
+
+function spoilSay(text){
+
+  const bubble = document.getElementById("spoilChatBubble");
+
+  bubble.innerText = text;
+  bubble.style.opacity = "1";
+  bubble.style.transform = "translateX(-50%) scale(1.05)";
+
+  // tiny pop animation
+  setTimeout(() => {
+    bubble.style.transform = "translateX(-50%) scale(1)";
+  }, 200);
+
+  // 💥 IMPORTANT: clears previous timers (this fixes missing text issue)
+  clearTimeout(bubble._idleTimer);
+
+  // 💭 go back to "hmm" after 2800ms
+  bubble._idleTimer = setTimeout(() => {
+    bubble.innerText = "hmm";
+  }, 2800);
+}
+
+function enableIcecreamDrag(){
+
+  const icecream = document.getElementById("icecreamItem");
+  const nami = document.getElementById("spoilNami");
+
+  let isDragging = false;
+  let offsetX, offsetY;
+
+  icecream.onmousedown = function(e){
+    isDragging = true;
+
+    offsetX = e.clientX - icecream.getBoundingClientRect().left;
+    offsetY = e.clientY - icecream.getBoundingClientRect().top;
+
+    icecream.style.transition = "none";
+  };
+
+  document.onmousemove = function(e){
+    if(!isDragging) return;
+
+    icecream.style.left = (e.clientX - offsetX) + "px";
+    icecream.style.top = (e.clientY - offsetY) + "px";
+  };
+
+  document.onmouseup = function(){
+    if(!isDragging) return;
+
+    isDragging = false;
+    checkIcecreamDrop();
+  };
+}
+
+function checkIcecreamDrop(){
+
+  const icecream = document.getElementById("icecreamItem");
+  const nami = document.getElementById("spoilNami");
+
+  const i = icecream.getBoundingClientRect();
+  const n = nami.getBoundingClientRect();
+
+  const overlap =
+    i.left < n.right &&
+    i.right > n.left &&
+    i.top < n.bottom &&
+    i.bottom > n.top;
+
+  if(overlap){
+    triggerIcecreamSuccess();
+  }
+}
+
+function triggerIcecreamSuccess(){
+
+  const icecream = document.getElementById("icecreamItem");
+  const nami = document.getElementById("spoilNami");
+  const frozen = document.getElementById("frozennami");
+  const bubble = document.getElementById("spoilChatBubble");
+
+  // 🍦 swap to frozen nami
+  nami.style.opacity = "0";
+  frozen.style.opacity = "1";
+
+  bubble.innerText = "sooo cold >.<";
+
+  // 🍦 ice cream disappears
+  icecream.style.opacity = "0";
+  icecream.style.transform = "scale(0.8)";
+spoilSay("sooo cold >.<");
+
+  // 🔁 reset back to normal nami
+  setTimeout(() => {
+
+    frozen.style.opacity = "0";
+    nami.style.opacity = "1";
+
+    icecream.remove();
+
+  }, 2500);
+}
+
+function enableBananaDrag(){
+
+  const banana = document.getElementById("bananaItem");
+
+  let isDragging = false;
+  let offsetX, offsetY;
+
+  banana.onmousedown = function(e){
+    isDragging = true;
+
+    offsetX = e.clientX - banana.getBoundingClientRect().left;
+    offsetY = e.clientY - banana.getBoundingClientRect().top;
+
+    banana.style.transition = "none";
+  };
+
+  document.onmousemove = function(e){
+    if(!isDragging) return;
+
+    banana.style.left = (e.clientX - offsetX) + "px";
+    banana.style.top = (e.clientY - offsetY) + "px";
+  };
+
+  document.onmouseup = function(){
+    if(!isDragging) return;
+
+    isDragging = false;
+    checkBananaDrop();
+  };
+}
+
+function checkBananaDrop(){
+
+  const banana = document.getElementById("bananaItem");
+  const nami = document.getElementById("spoilNami");
+
+  const b = banana.getBoundingClientRect();
+  const n = nami.getBoundingClientRect();
+
+  const overlap =
+    b.left < n.right &&
+    b.right > n.left &&
+    b.top < n.bottom &&
+    b.bottom > n.top;
+
+  if(overlap){
+    triggerBananaSuccess();
+  }
+}
+
+function triggerBananaSuccess(){
+
+  const banana = document.getElementById("bananaItem");
+  const nami = document.getElementById("spoilNami");
+  const angry = document.getElementById("spoilNamiAngry");
+  const bubble = document.getElementById("spoilChatBubble");
+
+  // 🧠 kill any delay mismatch
+  bubble.style.opacity = "1";
+
+  // 💬 instant text (same as icecream)
+  bubble.innerText = "chiiiiiiii";
+
+  // 🍌 INSTANT swap (NO delays, NO animation chains)
+  nami.style.opacity = "0";
+  angry.style.opacity = "1";
+
+  // 🍌 item disappears instantly (same feel as icecream)
+  banana.style.opacity = "0";
+  banana.style.transform = "scale(0.8)";
+spoilSay("chiiiii");
+  // 🔁 reset (match icecream timing feel)
+  setTimeout(() => {
+
+    angry.style.opacity = "0";
+    nami.style.opacity = "1";
+
+    banana.remove();
+
+  }, 2500);
+}
+
+function enableFlowersDrag(){
+
+  const flowers = document.getElementById("flowersItem");
+
+  let isDragging = false;
+  let offsetX, offsetY;
+
+  flowers.onmousedown = function(e){
+    isDragging = true;
+
+    offsetX = e.clientX - flowers.getBoundingClientRect().left;
+    offsetY = e.clientY - flowers.getBoundingClientRect().top;
+
+    flowers.style.transition = "none";
+  };
+
+  document.onmousemove = function(e){
+    if(!isDragging) return;
+
+    flowers.style.left = (e.clientX - offsetX) + "px";
+    flowers.style.top = (e.clientY - offsetY) + "px";
+  };
+
+  document.onmouseup = function(){
+    if(!isDragging) return;
+
+    isDragging = false;
+    checkFlowersDrop();
+  };
+}
+
+function checkFlowersDrop(){
+
+  const flowers = document.getElementById("flowersItem");
+  const nami = document.getElementById("spoilNami");
+
+  const f = flowers.getBoundingClientRect();
+  const n = nami.getBoundingClientRect();
+
+  const overlap =
+    f.left < n.right &&
+    f.right > n.left &&
+    f.top < n.bottom &&
+    f.bottom > n.top;
+
+  if(overlap){
+    triggerFlowersSuccess();
+  }
+}
+function triggerFlowersSuccess(){
+
+  const flowers = document.getElementById("flowersItem");
+  const nami = document.getElementById("spoilNami");
+  const love = document.getElementById("lovenami");
+
+  // 💖 swap
+  nami.style.opacity = "0";
+  love.style.opacity = "1";
+
+  // 💬 reaction
+  spoilSay("i love you bby");
+
+  // 🌸 remove flowers
+  flowers.style.opacity = "0";
+  flowers.style.transform = "scale(0.8)";
+
+  // 🔁 reset EXACT SAME TIMING AS ICE CREAM
+  setTimeout(() => {
+
+    love.style.opacity = "0";
+    nami.style.opacity = "1";
+
+    flowers.remove();
+
+  }, 2500);
+}
+
+function enableWaterDrag(){
+
+  const water = document.getElementById("waterItem");
+
+  let isDragging = false;
+  let offsetX, offsetY;
+
+  water.onmousedown = function(e){
+    isDragging = true;
+
+    offsetX = e.clientX - water.getBoundingClientRect().left;
+    offsetY = e.clientY - water.getBoundingClientRect().top;
+
+    water.style.transition = "none";
+  };
+
+  document.onmousemove = function(e){
+    if(!isDragging) return;
+
+    water.style.left = (e.clientX - offsetX) + "px";
+    water.style.top = (e.clientY - offsetY) + "px";
+  };
+
+  document.onmouseup = function(){
+    if(!isDragging) return;
+
+    isDragging = false;
+    checkWaterDrop();
+  };
+}
+
+function checkWaterDrop(){
+
+  const water = document.getElementById("waterItem");
+  const nami = document.getElementById("spoilNami");
+
+  const w = water.getBoundingClientRect();
+  const n = nami.getBoundingClientRect();
+
+  const overlap =
+    w.left < n.right &&
+    w.right > n.left &&
+    w.top < n.bottom &&
+    w.bottom > n.top;
+
+  if(overlap){
+    triggerWaterSuccess();
+  }
+}
+
+function triggerWaterSuccess(){
+
+  const water = document.getElementById("waterItem");
+  const nami = document.getElementById("spoilNami");
+  const calm = document.getElementById("calmnami");
+
+  // 💧 swap to calm nami
+  nami.style.opacity = "0";
+  calm.style.opacity = "1";
+
+  // 💬 reaction
+  spoilSay("i feel hydrated now");
+
+  // 💧 water disappears
+  water.style.opacity = "0";
+  water.style.transform = "scale(0.8)";
+
+  // 🔁 SAME timing as all others (IMPORTANT)
+  setTimeout(() => {
+
+    calm.style.opacity = "0";
+    nami.style.opacity = "1";
+
+    water.remove();
+
+  }, 2500);
+}
+
+function enableCupNoodlesDrag(){
+
+  const noodles = document.getElementById("cupnoodlesItem");
+
+  let isDragging = false;
+  let offsetX, offsetY;
+
+  noodles.onmousedown = function(e){
+    isDragging = true;
+
+    offsetX = e.clientX - noodles.getBoundingClientRect().left;
+    offsetY = e.clientY - noodles.getBoundingClientRect().top;
+
+    noodles.style.transition = "none";
+  };
+
+  document.onmousemove = function(e){
+    if(!isDragging) return;
+
+    noodles.style.left = (e.clientX - offsetX) + "px";
+    noodles.style.top = (e.clientY - offsetY) + "px";
+  };
+
+  document.onmouseup = function(){
+    if(!isDragging) return;
+
+    isDragging = false;
+    checkCupNoodlesDrop();
+  };
+}
+
+function checkCupNoodlesDrop(){
+
+  const noodles = document.getElementById("cupnoodlesItem");
+  const nami = document.getElementById("spoilNami");
+
+  const c = noodles.getBoundingClientRect();
+  const n = nami.getBoundingClientRect();
+
+  const overlap =
+    c.left < n.right &&
+    c.right > n.left &&
+    c.top < n.bottom &&
+    c.bottom > n.top;
+
+  if(overlap){
+    triggerCupNoodlesSuccess();
+  }
+}
+
+function triggerCupNoodlesSuccess(){
+
+  const noodles = document.getElementById("cupnoodlesItem");
+  const nami = document.getElementById("spoilNami");
+  const excited = document.getElementById("excitednami");
+
+  // 🍜 swap
+  nami.style.opacity = "0";
+  excited.style.opacity = "1";
+
+  // 💬 reaction
+  spoilSay("too hot fufufufufu");
+
+  // 🍜 noodles disappear
+  noodles.style.opacity = "0";
+  noodles.style.transform = "scale(0.8)";
+
+  // 🔁 reset (same timing ALWAYS)
+  setTimeout(() => {
+
+    excited.style.opacity = "0";
+    nami.style.opacity = "1";
+
+    noodles.remove();
+
+  }, 2500);
+}
+
+let teddyClickedOnce = false;
+
+const teddy = document.getElementById("teddyBear");
+const ui = document.getElementById("teddyUI");
+const bubble = document.getElementById("teddyBubble");
+const viewBtn = document.getElementById("viewBtn");
+
+teddy.addEventListener("click", () => {
+
+    // 🧸 show UI
+    ui.classList.add("show");
+
+    // 💬 teddy speaks
+    bubble.innerText = "i've got it stored for her to see :3";
+
+    // 💥 unlock view button after first click
+    if(teddyClickedOnce){
+        viewBtn.style.display = "block";
+    }
+
+    teddyClickedOnce = true;
+
+    // ✨ WIGGLE HERE (same click)
+    teddy.classList.add("teddy-wiggle");
+
+    setTimeout(() => {
+        teddy.classList.remove("teddy-wiggle");
+    }, 600);
+
+});
+
+function saveTeddyMessage(){
+
+    const input = document.getElementById("teddyInput");
+    const text = input.value.trim();
+
+    if(!text) return;
+
+    let msgs = JSON.parse(localStorage.getItem("teddyMsgs")) || [];
+    msgs.push(text);
+    localStorage.setItem("teddyMsgs", JSON.stringify(msgs));
+
+    input.value = "";
+
+    const bubble = document.getElementById("teddyBubble");
+    bubble.innerText = "i've got it with me";
+
+    // 💥 tiny bounce on send icon
+    const btn = document.getElementById("sendBtn");
+    btn.style.transform = "scale(1.3)";
+    setTimeout(()=> btn.style.transform = "scale(1)", 150);
+
+for(let i = 0; i < 5; i++){
+    const heart = document.createElement("div");
+    heart.innerText = "♡";
+    heart.className = "miniHeart";
+
+    heart.style.left = (Math.random() * 60 - 30) + "px";
+
+    document.querySelector(".teddyWrap").appendChild(heart);
+
+    setTimeout(()=> heart.remove(), 2000);
+}
+}
+
+function toggleMessages(){
+
+    const box = document.getElementById("teddyMessages");
+
+    if(box.style.display === "block"){
+        box.style.display = "none";
+        return;
+    }
+
+    renderTeddyMessages();
+    box.style.display = "block";
+}
+
+function renderTeddyMessages(){
+
+    const box = document.getElementById("teddyMessages");
+    box.innerHTML = "";
+
+    const msgs = JSON.parse(localStorage.getItem("teddyMsgs")) || [];
+
+    msgs.forEach(m => {
+
+        const div = document.createElement("div");
+        div.className = "teddyMsg";
+        div.innerText = m;
+
+        box.appendChild(div);
+    });
+}
+
+bubble.style.transform = "scale(1.1)";
+setTimeout(()=> bubble.style.transform = "scale(1)", 200);
+
+function viewTeddyMessages(){
+
+    const container = document.getElementById("teddyOldMessages");
+    container.innerHTML = ""; // clear old view
+
+    let msgs = JSON.parse(localStorage.getItem("teddyMsgs")) || [];
+
+    if(msgs.length === 0){
+        container.innerText = "no messages yet :<";
+        return;
+    }
+
+    msgs.forEach(m => {
+        const div = document.createElement("div");
+        div.className = "teddyMsg";
+        div.innerText = m;
+
+        container.appendChild(div);
+    });
+}
+
+function openTeddyModal(){
+
+    const modal = document.getElementById("teddyModal");
+    const container = document.getElementById("teddyModalContent");
+
+    container.innerHTML = "";
+
+    let msgs = JSON.parse(localStorage.getItem("teddyMsgs")) || [];
+
+    if(msgs.length === 0){
+        container.innerText = "no messages yet :<";
+    } else {
+
+        msgs.forEach((m, i) => {
+
+            const div = document.createElement("div");
+            div.className = "teddyMsg";
+
+            div.innerText = `text ${i+1} - ${m}`;
+
+            container.appendChild(div);
+        });
+    }
+
+    modal.classList.add("show");
+}
+function closeTeddyModal(){
+    document.getElementById("teddyModal").classList.remove("show");
+}
+
+
+
+</script>
+</body>
+</html>
